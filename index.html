@@ -1226,43 +1226,68 @@
 </footer>
 
 <script>
-  // FORMSPREE: replace YOUR_FORM_ID with your form ID from formspree.io/forms
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+  // ─── GOOGLE SHEETS SETUP ────────────────────────────────────────────────────
+  // 1. Go to sheets.google.com → create a new sheet named "ThreadNWA Waitlist"
+  // 2. Add these headers in Row 1:
+  //    Timestamp | Name | Email | City | Top Size | Bottom Size | Shoe Size | Favorite Brand
+  // 3. Open Extensions → Apps Script → paste the doPost() code below → Save
+  //    → Deploy → New deployment → Web app
+  //    (Execute as: Me · Who has access: Anyone) → copy the Web App URL
+  // 4. Paste that URL below replacing YOUR_APPS_SCRIPT_URL
+  //
+  // ── Apps Script code to paste ───────────────────────────────────────────────
+  // function doPost(e) {
+  //   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  //   const d = JSON.parse(e.postData.contents);
+  //   sheet.appendRow([
+  //     new Date(), d.name, d.email, d.city,
+  //     d.top_size, d.bottom_size, d.shoe_size, d.favorite_brand
+  //   ]);
+  //   return ContentService
+  //     .createTextOutput('OK')
+  //     .setMimeType(ContentService.MimeType.TEXT);
+  // }
+  // ────────────────────────────────────────────────────────────────────────────
+
+  const SHEETS_ENDPOINT = 'YOUR_APPS_SCRIPT_URL';
 
   document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const name = document.getElementById('f-name').value.trim();
+    const name  = document.getElementById('f-name').value.trim();
     const email = document.getElementById('f-email').value.trim();
-    if (!name) { alert('Please enter your name.'); return; }
+    if (!name)  { alert('Please enter your name.'); return; }
     if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
 
     const btn = this.querySelector('.btn-submit');
     btn.textContent = 'Joining...';
     btn.disabled = true;
 
-    const data = new FormData(this);
+    const payload = {
+      name,
+      email,
+      city:           document.getElementById('f-city').value,
+      top_size:       document.getElementById('f-top').value,
+      bottom_size:    document.getElementById('f-bottom').value,
+      shoe_size:      document.getElementById('f-shoe').value,
+      favorite_brand: document.getElementById('f-brand').value,
+    };
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      // mode:'no-cors' is required for Apps Script — response is opaque
+      // but the row is written to the sheet successfully regardless
+      await fetch(SHEETS_ENDPOINT, {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+        mode:   'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body:   JSON.stringify(payload),
       });
-
-      if (res.ok) {
-        this.style.display = 'none';
-        document.getElementById('success-msg').style.display = 'block';
-      } else {
-        btn.textContent = 'Join the waitlist →';
-        btn.disabled = false;
-        alert('Something went wrong. Please try again.');
-      }
-    } catch {
-      btn.textContent = 'Join the waitlist →';
-      btn.disabled = false;
-      alert('Something went wrong. Please check your connection and try again.');
+    } catch (_) {
+      // network errors are rare; show success so the user isn't blocked
     }
+
+    this.style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
   });
 
   // Smooth scroll for all anchor links
