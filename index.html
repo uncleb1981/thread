@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thread NWA — Swap Clothes, Not Cash</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF7F4;
+      --warm-white: #FFFFFF;
+      --sage: #8BAF8A;
+      --sage-light: #B8D1B7;
+      --sage-dark: #5E8A5C;
+      --blush: #E8B4A0;
+      --blush-light: #F5D9CF;
+      --charcoal: #2C2C2C;
+      --gray: #6B6B6B;
+      --light-gray: #F0EDEA;
+      --border: #E2DDD9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250, 247, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--sage-dark); }
+
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--charcoal); }
+
+    .btn-primary {
+      background: var(--sage-dark);
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      padding: 0.6rem 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding: 80px 5% 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      color: var(--charcoal);
+    }
+
+    .hero-text h1 em {
+      color: var(--sage-dark);
+      font-style: normal;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 480px;
+      margin-bottom: 2rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      background: var(--blush-light);
+      color: var(--charcoal);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .hero-cta { display: flex; gap: 1rem; align-items: center; }
+
+    .btn-secondary {
+      color: var(--charcoal);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-secondary:hover { color: var(--sage-dark); }
+
+    /* PHONE MOCKUP */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .phone-wrap {
+      position: relative;
+      width: 280px;
+    }
+
+    .phone {
+      width: 280px;
+      height: 580px;
+      background: var(--charcoal);
+      border-radius: 44px;
+      padding: 12px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.18), 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--warm-white);
+      border-radius: 34px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .screen-status {
+      background: var(--warm-white);
+      padding: 14px 20px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .screen-header {
+      padding: 6px 16px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .screen-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    .size-badge-screen {
+      background: var(--sage-light);
+      color: var(--sage-dark);
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+
+    .card-stack {
+      flex: 1;
+      position: relative;
+      margin: 10px;
+    }
+
+    .closet-card {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--light-gray);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .closet-card:nth-child(2) {
+      transform: rotate(4deg) scale(0.95);
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      z-index: 0;
+    }
+
+    .closet-card:nth-child(1) {
+      z-index: 1;
+    }
+
+    .card-photo {
+      width: 100%;
+      height: 72%;
+      object-fit: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .card-photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: 72%;
+      gap: 2px;
+    }
+
+    .photo-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      background: var(--blush-light);
+    }
+
+    .photo-cell:nth-child(1) { background: #F0E8E2; }
+    .photo-cell:nth-child(2) { background: #E2EDE2; }
+    .photo-cell:nth-child(3) { background: #E8E2F0; }
+    .photo-cell:nth-child(4) { background: #F0EDE2; }
+
+    .photo-cell img, .ex-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-info {
+      padding: 10px 12px;
+    }
+
+    .card-name {
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: var(--charcoal);
+    }
+
+    .card-sizes {
+      font-size: 0.6rem;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    .card-items {
+      font-size: 0.58rem;
+      color: var(--sage-dark);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .swipe-actions {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+    }
+
+    .swipe-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .swipe-btn.pass { border-color: #ddd; background: #fff; }
+    .swipe-btn.heart { border-color: var(--blush); background: var(--blush-light); }
+
+    /* floating cards around phone */
+    .float-card {
+      position: absolute;
+      background: white;
+      border-radius: 12px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .float-card-1 {
+      top: 60px;
+      left: -110px;
+      color: var(--charcoal);
+    }
+    .float-card-1 .fc-label { font-size: 0.6rem; color: var(--gray); margin-bottom: 2px; }
+    .float-card-1 .fc-val { font-weight: 600; }
+
+    .float-card-2 {
+      bottom: 100px;
+      right: -120px;
+      background: var(--sage-dark);
+      color: white;
+    }
+    .float-card-2 .fc-label { font-size: 0.6rem; opacity: 0.75; margin-bottom: 2px; }
+    .float-card-2 .fc-val { font-weight: 600; }
+
+    /* SECTION COMMONS */
+    section {
+      padding: 80px 5%;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--blush-light);
+      color: var(--charcoal);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      color: var(--gray);
+      font-size: 1rem;
+      max-width: 520px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* HOW IT WORKS */
+    .how-bg {
+      background: var(--charcoal);
+      color: white;
+    }
+
+    .how-bg .section-title { color: white; }
+    .how-bg .section-sub { color: rgba(255,255,255,0.6); }
+    .how-bg .section-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .step {
+      position: relative;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--sage-dark);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+
+    .step h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: white;
+    }
+
+    .step p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .step-connector {
+      position: absolute;
+      top: 24px;
+      right: -1rem;
+      width: calc(100% - 60px);
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      left: 58px;
+    }
+    .step:last-child .step-connector { display: none; }
+
+    /* SIZE MATCHING */
+    .size-section { background: var(--warm-white); }
+
+    .size-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .size-table {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .size-table-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .size-row {
+      display: grid;
+      grid-template-columns: 120px repeat(4, 1fr);
+      gap: 0.5rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      align-items: center;
+    }
+    .size-row:last-child { border-bottom: none; }
+
+    .size-row-header {
+      font-weight: 600;
+      font-size: 0.7rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .size-brand { font-weight: 500; color: var(--charcoal); }
+
+    .size-val {
+      text-align: center;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .size-highlight {
+      background: var(--sage-light);
+      color: var(--sage-dark);
+      font-weight: 700;
+    }
+
+    .size-match-note {
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--sage-dark);
+      font-weight: 500;
+    }
+
+    .size-features { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .size-feature {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .size-feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--blush-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .size-feature h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .size-feature p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* EXAMPLES */
+    .examples-section { background: var(--cream); }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .example-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .example-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+    }
+
+    .example-photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 200px;
+      gap: 2px;
+    }
+
+    .ex-photo {
+      overflow: hidden;
+    }
+
+    .ex-photo:nth-child(1) { background: #F5EEE9; }
+    .ex-photo:nth-child(2) { background: #EAF0EA; }
+    .ex-photo:nth-child(3) { background: #EDE9F5; }
+    .ex-photo:nth-child(4) { background: #F5F0E9; }
+
+    .example-info {
+      padding: 1.2rem;
+    }
+
+    .example-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .example-size {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .example-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .ex-tag {
+      background: var(--light-gray);
+      color: var(--gray);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      font-weight: 500;
+    }
+
+    .example-actions {
+      display: flex;
+      border-top: 1px solid var(--border);
+    }
+
+    .ex-action {
+      flex: 1;
+      padding: 0.75rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background 0.15s;
+    }
+    .ex-action:hover { background: var(--light-gray); }
+    .ex-action.love:hover { background: var(--blush-light); }
+
+    /* NWA SECTION */
+    .nwa-section {
+      background: linear-gradient(135deg, var(--sage-dark) 0%, #3D6B3B 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .nwa-section .section-title { color: white; }
+    .nwa-section .section-sub { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto 2.5rem; }
+    .nwa-section .section-tag { background: rgba(255,255,255,0.15); color: white; }
+
+    .nwa-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin: 3rem 0;
+    }
+
+    .nwa-stat {
+      text-align: center;
+    }
+
+    .nwa-stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      display: block;
+    }
+
+    .nwa-stat-label {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+
+    .nwa-cities {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .nwa-city {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: white;
+      font-weight: 500;
+    }
+
+    /* SIGNUP */
+    .signup-section {
+      background: var(--warm-white);
+      text-align: center;
+    }
+
+    .signup-section .section-sub { margin: 0 auto 2.5rem; }
+
+    .signup-form {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--cream);
+      border-radius: 24px;
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      background: white;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--sage-dark);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--sage-dark);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-submit:hover { background: var(--sage); transform: translateY(-1px); }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .success-msg .checkmark {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .success-msg h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-msg p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2rem 5%;
+      font-size: 0.8rem;
+    }
+
+    footer strong { color: rgba(255,255,255,0.85); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero-text p { max-width: 100%; }
+      .hero-cta { justify-content: center; }
+      .hero-badges { justify-content: center; }
+      .hero-visual { margin-top: 2rem; }
+      .float-card-1, .float-card-2 { display: none; }
+      .steps { grid-template-columns: 1fr; }
+      .step-connector { display: none; }
+      .size-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .example-grid { grid-template-columns: 1fr 1fr; }
+      .nwa-stats { gap: 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .example-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nwa-stats { flex-wrap: wrap; }
+      .nav-links .nav-hide { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Thread<span>NWA</span></div>
+  <div class="nav-links">
+    <a href="#how" class="nav-hide">How it works</a>
+    <a href="#sizing" class="nav-hide">Sizing</a>
+    <a href="#signup" class="btn-primary">Join the waitlist</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding-top: 0;">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-badges">
+        <span class="badge">Free · Always</span>
+        <span class="badge">Northwest Arkansas</span>
+        <span class="badge">Size-Matched</span>
+      </div>
+      <h1>Swap clothes.<br /><em>Not cash.</em></h1>
+      <p>Thread NWA connects women in NWA to exchange clothing they love but no longer wear — matched to your exact size across every brand, for free.</p>
+      <div class="hero-cta">
+        <a href="#signup" class="btn-primary">Join the waitlist →</a>
+        <a href="#how" class="btn-secondary">See how it works ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="phone-wrap">
+        <!-- Background floating cards -->
+        <div class="float-card float-card-1">
+          <div class="fc-label">Matched size</div>
+          <div class="fc-val">Zara 10 = H&M Large</div>
+        </div>
+        <div class="float-card float-card-2">
+          <div class="fc-label">New match!</div>
+          <div class="fc-val">💚 Sarah liked your closet</div>
+        </div>
+
+        <div class="phone">
+          <div class="phone-screen">
+            <!-- Status bar -->
+            <div class="screen-status">
+              <span>9:41</span>
+              <span>●●● ▲ ▌▌</span>
+            </div>
+            <!-- App header -->
+            <div class="screen-header">
+              <div class="screen-logo">ThreadNWA</div>
+              <div class="size-badge-screen">Size 8 · Med</div>
+            </div>
+            <!-- Card stack -->
+            <div class="card-stack">
+              <!-- Back card -->
+              <div class="closet-card">
+                <div class="card-photo-grid">
+                  <div class="photo-cell"><img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=140&h=140&fit=crop&auto=format" alt="dress" /></div>
+                  <div class="photo-cell"><img src="https://images.unsplash.com/photo-1521369909029-2afed882baaa?w=140&h=140&fit=crop&auto=format" alt="hat" /></div>
+                  <div class="photo-cell"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=140&h=140&fit=crop&auto=format" alt="shoes" /></div>
+                  <div class="photo-cell"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=140&h=140&fit=crop&auto=format" alt="jacket" /></div>
+                </div>
+                <div class="card-info">
+                  <div class="card-name">Megan's Closet</div>
+                  <div class="card-sizes">Banana Republic 8 · Gap M</div>
+                  <div class="card-items">12 items available</div>
+                </div>
+              </div>
+              <!-- Front card -->
+              <div class="closet-card">
+                <div class="card-photo-grid">
+                  <div class="photo-cell"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=140&h=140&fit=crop&auto=format" alt="bag" /></div>
+                  <div class="photo-cell"><img src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=140&h=140&fit=crop&auto=format" alt="scarf" /></div>
+                  <div class="photo-cell"><img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=140&h=140&fit=crop&auto=format" alt="top" /></div>
+                  <div class="photo-cell"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=140&h=140&fit=crop&auto=format" alt="sneakers" /></div>
+                </div>
+                <div class="card-info">
+                  <div class="card-name">Ashley's Closet</div>
+                  <div class="card-sizes">Loft 10 · Anthropologie M</div>
+                  <div class="card-items">8 items available</div>
+                </div>
+              </div>
+            </div>
+            <!-- Swipe buttons -->
+            <div class="swipe-actions">
+              <div class="swipe-btn pass">✕</div>
+              <div class="swipe-btn heart">♥</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-bg">
+  <div class="section-inner">
+    <div class="section-tag">How it works</div>
+    <h2 class="section-title">Tinder for your closet.</h2>
+    <p class="section-sub">Browse women's closets in NWA who are your exact size. Heart the ones you love, skip the rest — it's that simple.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-connector"></div>
+        <div class="step-number">1</div>
+        <h3>Set your sizes</h3>
+        <p>Tell us your size in the brands you actually shop — we handle the cross-brand matching so you only see closets in your exact fit.</p>
+      </div>
+      <div class="step">
+        <div class="step-connector"></div>
+        <div class="step-number">2</div>
+        <h3>Browse & heart</h3>
+        <p>Swipe through closet photos from women near you in NWA. Heart closets you like, skip the rest. When it's mutual, it's a match.</p>
+      </div>
+      <div class="step">
+        <div class="step-connector"></div>
+        <div class="step-number">3</div>
+        <h3>Meet & swap</h3>
+        <p>Chat with your match to arrange a local meetup in Bentonville, Fayetteville, or Rogers. Exchange pieces you love — no money, no shipping.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIZE MATCHING -->
+<section id="sizing" class="size-section">
+  <div class="section-inner">
+    <div class="size-grid">
+      <div>
+        <div class="section-tag">Smart sizing</div>
+        <h2 class="section-title">Finally — sizes that actually make sense.</h2>
+        <p class="section-sub" style="margin-bottom: 2rem;">A size 8 at Banana Republic is a 10 at Zara and a Medium at H&M. Thread NWA maps your sizes across brands so you only see women you'll actually fit.</p>
+
+        <div class="size-features">
+          <div class="size-feature">
+            <div class="size-feature-icon">📐</div>
+            <div>
+              <h4>Cross-brand matching</h4>
+              <p>We maintain a living database of sizing conversions across 50+ major retailers — from Anthropologie to Zara.</p>
+            </div>
+          </div>
+          <div class="size-feature">
+            <div class="size-feature-icon">👗</div>
+            <div>
+              <h4>Tops, bottoms, dresses & shoes</h4>
+              <p>Set your size by category. Your top size doesn't have to match your bottom size — we handle each separately.</p>
+            </div>
+          </div>
+          <div class="size-feature">
+            <div class="size-feature-icon">✏️</div>
+            <div>
+              <h4>You're in control</h4>
+              <p>Override any size with your real measurements. We'll use your actual body measurements to find the best fits.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="size-table">
+          <div class="size-table-title">Example: Finding your matches</div>
+          <div class="size-row size-row-header">
+            <span>Brand</span>
+            <span style="text-align:center">XS</span>
+            <span style="text-align:center">S</span>
+            <span style="text-align:center">M</span>
+            <span style="text-align:center">L</span>
+          </div>
+          <div class="size-row">
+            <span class="size-brand">Anthropologie</span>
+            <span class="size-val">0–2</span>
+            <span class="size-val">4–6</span>
+            <span class="size-val size-highlight">8–10</span>
+            <span class="size-val">12–14</span>
+          </div>
+          <div class="size-row">
+            <span class="size-brand">Loft</span>
+            <span class="size-val">0–2</span>
+            <span class="size-val">4–6</span>
+            <span class="size-val size-highlight">8–10</span>
+            <span class="size-val">12–14</span>
+          </div>
+          <div class="size-row">
+            <span class="size-brand">Zara</span>
+            <span class="size-val">0–2</span>
+            <span class="size-val">4–6</span>
+            <span class="size-val size-highlight">8–10</span>
+            <span class="size-val">12–14</span>
+          </div>
+          <div class="size-row">
+            <span class="size-brand">H&amp;M</span>
+            <span class="size-val">2–4</span>
+            <span class="size-val">6–8</span>
+            <span class="size-val size-highlight">10–12</span>
+            <span class="size-val">14–16</span>
+          </div>
+          <div class="size-row">
+            <span class="size-brand">Banana Republic</span>
+            <span class="size-val">00–0</span>
+            <span class="size-val">2–4</span>
+            <span class="size-val size-highlight">6–8</span>
+            <span class="size-val">10–12</span>
+          </div>
+          <div class="size-match-note">
+            ✓ All highlighted sizes are matched to each other — you'd see all of these closets
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLES -->
+<section class="examples-section">
+  <div class="section-inner">
+    <div class="section-tag">Browse closets</div>
+    <h2 class="section-title">See what's waiting for you.</h2>
+    <p class="section-sub">Real women, real closets — right here in NWA. Heart it to let them know you're interested.</p>
+
+    <div class="example-grid">
+
+      <div class="example-card">
+        <div class="example-photo-grid">
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=200&h=200&fit=crop&auto=format" alt="top" /></div>
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200&h=200&fit=crop&auto=format" alt="jacket" /></div>
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop&auto=format" alt="sneakers" /></div>
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?w=200&h=200&fit=crop&auto=format" alt="bag" /></div>
+        </div>
+        <div class="example-info">
+          <div class="example-name">Ashley · Bentonville</div>
+          <div class="example-size">Anthropologie 8 · Zara M · Size 8.5 shoe</div>
+          <div class="example-tags">
+            <span class="ex-tag">Workwear</span>
+            <span class="ex-tag">Casual</span>
+            <span class="ex-tag">14 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-photo-grid">
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1503342394128-c104d54dba01?w=200&h=200&fit=crop&auto=format" alt="dress" /></div>
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=200&h=200&fit=crop&auto=format" alt="top" /></div>
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&h=200&fit=crop&auto=format" alt="jewelry" /></div>
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=200&h=200&fit=crop&auto=format" alt="clothing" /></div>
+        </div>
+        <div class="example-info">
+          <div class="example-name">Megan · Fayetteville</div>
+          <div class="example-size">Loft 10 · Gap M/L · Free People S</div>
+          <div class="example-tags">
+            <span class="ex-tag">Boho</span>
+            <span class="ex-tag">Accessories</span>
+            <span class="ex-tag">9 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-photo-grid">
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200&h=200&fit=crop&auto=format" alt="shoes" /></div>
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200&h=200&fit=crop&auto=format" alt="accessories" /></div>
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=200&h=200&fit=crop&auto=format" alt="jeans" /></div>
+          <div class="ex-photo"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=200&h=200&fit=crop&auto=format" alt="jacket" /></div>
+        </div>
+        <div class="example-info">
+          <div class="example-name">Sarah · Rogers</div>
+          <div class="example-size">Banana Republic 6 · ASOS 10 · Size 8 shoe</div>
+          <div class="example-tags">
+            <span class="ex-tag">Date night</span>
+            <span class="ex-tag">Seasonal</span>
+            <span class="ex-tag">11 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NWA -->
+<section class="nwa-section">
+  <div class="section-inner">
+    <div class="section-tag">Starting local</div>
+    <h2 class="section-title">Built for Northwest Arkansas.</h2>
+    <p class="section-sub">We're starting right here — no shipping, no strangers from across the country. Just women in your community swapping clothes they love.</p>
+
+    <div class="nwa-stats">
+      <div class="nwa-stat">
+        <span class="nwa-stat-val">Free</span>
+        <div class="nwa-stat-label">Always free to use</div>
+      </div>
+      <div class="nwa-stat">
+        <span class="nwa-stat-val">Local</span>
+        <div class="nwa-stat-label">NWA meetups only</div>
+      </div>
+      <div class="nwa-stat">
+        <span class="nwa-stat-val">50+</span>
+        <div class="nwa-stat-label">Brands supported</div>
+      </div>
+    </div>
+
+    <div class="nwa-cities">
+      <span class="nwa-city">Bentonville</span>
+      <span class="nwa-city">Fayetteville</span>
+      <span class="nwa-city">Rogers</span>
+      <span class="nwa-city">Springdale</span>
+      <span class="nwa-city">Siloam Springs</span>
+      <span class="nwa-city">Bella Vista</span>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section id="signup" class="signup-section">
+  <div class="section-inner">
+    <div class="section-tag">Early access</div>
+    <h2 class="section-title">Be the first to swap.</h2>
+    <p class="section-sub">Join the waitlist and we'll let you know when Thread NWA launches. Early members get first access and help shape the app.</p>
+
+    <div class="signup-form">
+      <div id="form-body">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" placeholder="First name" id="f-name" />
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" placeholder="you@email.com" id="f-email" />
+        </div>
+        <div class="form-group">
+          <label>Where are you in NWA?</label>
+          <select id="f-city">
+            <option value="">Select your city</option>
+            <option>Bentonville</option>
+            <option>Fayetteville</option>
+            <option>Rogers</option>
+            <option>Springdale</option>
+            <option>Siloam Springs</option>
+            <option>Bella Vista</option>
+            <option>Other NWA area</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 600; color: var(--charcoal); margin-top: 0.5rem;">Your typical sizes (you can add more in the app)</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tops / Dresses</label>
+            <select id="f-top">
+              <option value="">Select</option>
+              <option>XS</option>
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+              <option>XL</option>
+              <option>XXL</option>
+              <option>0</option>
+              <option>2</option>
+              <option>4</option>
+              <option>6</option>
+              <option>8</option>
+              <option>10</option>
+              <option>12</option>
+              <option>14</option>
+              <option>16</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Bottoms / Jeans</label>
+            <select id="f-bottom">
+              <option value="">Select</option>
+              <option>XS (24-25")</option>
+              <option>S (26-27")</option>
+              <option>M (28-29")</option>
+              <option>L (30-31")</option>
+              <option>XL (32-33")</option>
+              <option>XXL (34"+)</option>
+              <option>Size 24</option>
+              <option>Size 25</option>
+              <option>Size 26</option>
+              <option>Size 27</option>
+              <option>Size 28</option>
+              <option>Size 29</option>
+              <option>Size 30</option>
+              <option>Size 31</option>
+              <option>Size 32</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Shoe size (US Women's)</label>
+            <select id="f-shoe">
+              <option value="">Select</option>
+              <option>5</option><option>5.5</option><option>6</option>
+              <option>6.5</option><option>7</option><option>7.5</option>
+              <option>8</option><option>8.5</option><option>9</option>
+              <option>9.5</option><option>10</option><option>10.5</option>
+              <option>11</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Favorite brand to shop</label>
+            <select id="f-brand">
+              <option value="">Select</option>
+              <option>Anthropologie</option>
+              <option>Banana Republic</option>
+              <option>Free People</option>
+              <option>H&M</option>
+              <option>Loft</option>
+              <option>Madewell</option>
+              <option>Nordstrom</option>
+              <option>Target / Universal Thread</option>
+              <option>Zara</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-submit" onclick="handleSubmit()">Join the waitlist →</button>
+        <p class="form-note">No spam, ever. We'll only email you when Thread NWA is ready to launch in your area.</p>
+      </div>
+
+      <div class="success-msg" id="success-msg">
+        <div class="checkmark">💚</div>
+        <h3>You're on the list!</h3>
+        <p>We'll reach out as soon as Thread NWA launches in Northwest Arkansas. Get ready to refresh your wardrobe — for free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Thread NWA</strong> · Free clothing exchange for women in Northwest Arkansas</p>
+  <p style="margin-top: 0.5rem;">Coming soon to iOS · <a href="mailto:hello@threadnwa.com" style="color: inherit;">hello@threadnwa.com</a></p>
+</footer>
+
+<script>
+  function handleSubmit() {
+    const name = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+
+    if (!name) { alert('Please enter your name.'); return; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+
+    document.getElementById('form-body').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+
+    // In production this would POST to your backend / Mailchimp / etc.
+    console.log('Waitlist signup:', { name, email,
+      city: document.getElementById('f-city').value,
+      topSize: document.getElementById('f-top').value,
+      bottomSize: document.getElementById('f-bottom').value,
+      shoeSize: document.getElementById('f-shoe').value,
+      brand: document.getElementById('f-brand').value,
+    });
+  }
+
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
