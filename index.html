@@ -780,6 +780,159 @@
       font-size: 0.9rem;
     }
 
+    /* CHAT / MATCH SECTION */
+    .chat-section { background: var(--warm-white); }
+
+    .chat-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .chat-copy .section-sub { margin-bottom: 2rem; }
+
+    .chat-features { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .chat-feature { display: flex; gap: 1rem; align-items: flex-start; }
+
+    .chat-feature-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--sage-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+
+    .chat-feature h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .chat-feature p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+    .chat-phone-wrap { display: flex; justify-content: center; }
+
+    .match-banner {
+      background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+      color: white; padding: 0.7rem 0.9rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+
+    .match-icon { font-size: 1.1rem; }
+    .match-title { font-weight: 700; font-size: 0.78rem; }
+    .match-sub { font-size: 0.62rem; opacity: 0.85; }
+
+    .chat-header {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.55rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+
+    .chat-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--blush); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; flex-shrink: 0;
+    }
+
+    .chat-name { font-size: 0.73rem; font-weight: 600; color: var(--charcoal); }
+    .chat-online { font-size: 0.6rem; color: var(--sage-dark); }
+
+    .chat-messages {
+      flex: 1; padding: 0.65rem;
+      display: flex; flex-direction: column; gap: 0.35rem;
+      background: var(--cream);
+    }
+
+    .msg-row { display: flex; }
+    .msg-row.sent { justify-content: flex-end; }
+
+    .bubble {
+      padding: 0.48rem 0.72rem;
+      border-radius: 16px;
+      max-width: 82%;
+      font-size: 0.7rem; line-height: 1.4;
+    }
+
+    .bubble.recv {
+      background: white; color: var(--charcoal);
+      border-bottom-left-radius: 4px;
+    }
+
+    .bubble.sent {
+      background: var(--sage-dark); color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-input-bar {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.55rem 0.6rem;
+      background: white; border-top: 1px solid var(--border);
+    }
+
+    .chat-input-field {
+      flex: 1; background: var(--light-gray);
+      border-radius: 20px; padding: 0.38rem 0.75rem;
+      font-size: 0.63rem; color: var(--gray);
+    }
+
+    .chat-send {
+      width: 24px; height: 24px;
+      background: var(--sage-dark); color: white;
+      border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      font-size: 0.65rem; cursor: pointer;
+    }
+
+    /* BRAND CHIPS */
+    .brand-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .brand-chip input[type="checkbox"] { display: none; }
+
+    .brand-chip label {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: white;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+    }
+
+    .brand-chip label:hover {
+      border-color: var(--sage);
+      color: var(--charcoal);
+    }
+
+    .brand-chip input:checked + label {
+      background: var(--sage-dark);
+      border-color: var(--sage-dark);
+      color: white;
+    }
+
+    /* MEASUREMENT FORM */
+    .measure-hint {
+      font-size: 0.72rem; color: var(--gray);
+      margin-top: 0.25rem; line-height: 1.4;
+    }
+
+    .measure-group-label {
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--sage-dark);
+      margin: 1.4rem 0 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
     /* FOOTER */
     footer {
       background: var(--charcoal);
@@ -804,6 +957,7 @@
       .size-grid { grid-template-columns: 1fr; gap: 2rem; }
       .example-grid { grid-template-columns: 1fr 1fr; }
       .nwa-stats { gap: 1.5rem; }
+      .chat-demo { grid-template-columns: 1fr; gap: 2rem; }
     }
 
     @media (max-width: 600px) {
@@ -822,7 +976,7 @@
   <div class="nav-links">
     <a href="#how" class="nav-hide">How it works</a>
     <a href="#sizing" class="nav-hide">Sizing</a>
-    <a href="#signup" class="btn-primary">Join the waitlist</a>
+    <a href="#signup" class="btn-primary">Sign up free</a>
   </div>
 </nav>
 
@@ -838,7 +992,7 @@
       <h1>Swap clothes.<br /><em>Not cash.</em></h1>
       <p>Thread NWA connects women in NWA to exchange clothing they love but no longer wear — matched to your exact size across every brand, for free.</p>
       <div class="hero-cta">
-        <a href="#signup" class="btn-primary">Join the waitlist →</a>
+        <a href="#signup" class="btn-primary">Start swapping free →</a>
         <a href="#how" class="btn-secondary">See how it works ↓</a>
       </div>
     </div>
@@ -867,7 +1021,7 @@
                 </div>
                 <div class="card-info">
                   <div class="card-name">Megan's Closet</div>
-                  <div class="card-sizes">Banana Republic 8 · Gap M</div>
+                  <div class="card-sizes">Bust 36 · Waist 28 · Hip 38</div>
                   <div class="card-items">12 items available</div>
                 </div>
               </div>
@@ -878,7 +1032,7 @@
                 </div>
                 <div class="card-info">
                   <div class="card-name">Ashley's Closet</div>
-                  <div class="card-sizes">Loft 10 · Anthropologie M</div>
+                  <div class="card-sizes">Bust 34 · Waist 26 · Hip 36</div>
                   <div class="card-items">8 items available</div>
                 </div>
               </div>
@@ -907,7 +1061,7 @@
         <div class="step-connector"></div>
         <div class="step-number">1</div>
         <h3>Set your sizes</h3>
-        <p>Tell us your size in the brands you actually shop — we handle the cross-brand matching so you only see closets in your exact fit.</p>
+        <p>Enter your actual measurements — bust, waist, hips. Not brand labels, not S/M/L guesses. We use the numbers that never lie.</p>
       </div>
       <div class="step">
         <div class="step-connector"></div>
@@ -930,30 +1084,30 @@
   <div class="section-inner">
     <div class="size-grid">
       <div>
-        <div class="section-tag">Smart sizing</div>
-        <h2 class="section-title">Finally — sizes that actually make sense.</h2>
-        <p class="section-sub" style="margin-bottom: 2rem;">A size 8 at Banana Republic is a 10 at Zara and a Medium at H&M. Thread NWA maps your sizes across brands so you only see women you'll actually fit.</p>
+        <div class="section-tag">Real sizing</div>
+        <h2 class="section-title">One body.<br/>Eight different labels.<br/><em style="font-style:italic; color:var(--sage-dark)">We ignore them all.</em></h2>
+        <p class="section-sub" style="margin-bottom: 2rem;">Brand sizing is marketing, not math. A "Medium" at Old Navy is a completely different garment than a "Medium" at Free People. We skip the labels entirely and match on your actual measurements — the only number that doesn't lie.</p>
 
         <div class="size-features">
           <div class="size-feature">
-            <div class="size-feature-icon">📐</div>
+            <div class="size-feature-icon">📏</div>
             <div>
-              <h4>Cross-brand matching</h4>
-              <p>We maintain a living database of sizing conversions across 50+ major retailers — from Anthropologie to Zara.</p>
+              <h4>Measurements first, always</h4>
+              <p>Enter your bust, waist, and hips in inches. That's it. We handle every brand translation behind the scenes.</p>
             </div>
           </div>
           <div class="size-feature">
-            <div class="size-feature-icon">👗</div>
+            <div class="size-feature-icon">👖</div>
             <div>
-              <h4>Tops, bottoms, dresses & shoes</h4>
-              <p>Set your size by category. Your top size doesn't have to match your bottom size — we handle each separately.</p>
+              <h4>Jeans use your actual waist</h4>
+              <p>We ask for your numeric waist measurement — not "Size 28" (which varies 1–2" across brands) but your real tape-measure inch.</p>
             </div>
           </div>
           <div class="size-feature">
-            <div class="size-feature-icon">✏️</div>
+            <div class="size-feature-icon">👟</div>
             <div>
-              <h4>You're in control</h4>
-              <p>Override any size with your real measurements. We'll use your actual body measurements to find the best fits.</p>
+              <h4>Shoes are straightforward</h4>
+              <p>US women's shoe sizing is actually consistent. Size 8 is a size 8 — the one area brands mostly agree on.</p>
             </div>
           </div>
         </div>
@@ -961,51 +1115,54 @@
 
       <div>
         <div class="size-table">
-          <div class="size-table-title">Example: Finding your matches</div>
-          <div class="size-row size-row-header">
+          <div class="size-table-title">Same woman · Bust 36" · Waist 28" · Hips 38"</div>
+          <div class="size-row size-row-header" style="grid-template-columns: 130px 1fr 1fr;">
             <span>Brand</span>
-            <span style="text-align:center">XS</span>
-            <span style="text-align:center">S</span>
-            <span style="text-align:center">M</span>
-            <span style="text-align:center">L</span>
+            <span style="text-align:center">Label she buys</span>
+            <span style="text-align:center">Why it's off</span>
           </div>
-          <div class="size-row">
-            <span class="size-brand">Anthropologie</span>
-            <span class="size-val">0–2</span>
-            <span class="size-val">4–6</span>
-            <span class="size-val size-highlight">8–10</span>
-            <span class="size-val">12–14</span>
+          <div class="size-row" style="grid-template-columns: 130px 1fr 1fr;">
+            <span class="size-brand">Madewell</span>
+            <span class="size-val size-highlight">8 / M</span>
+            <span class="size-val" style="font-size:0.7rem; color:var(--sage-dark)">True to size ✓</span>
           </div>
-          <div class="size-row">
-            <span class="size-brand">Loft</span>
-            <span class="size-val">0–2</span>
-            <span class="size-val">4–6</span>
-            <span class="size-val size-highlight">8–10</span>
-            <span class="size-val">12–14</span>
-          </div>
-          <div class="size-row">
+          <div class="size-row" style="grid-template-columns: 130px 1fr 1fr;">
             <span class="size-brand">Zara</span>
-            <span class="size-val">0–2</span>
-            <span class="size-val">4–6</span>
-            <span class="size-val size-highlight">8–10</span>
-            <span class="size-val">12–14</span>
+            <span class="size-val">L</span>
+            <span class="size-val" style="font-size:0.7rem; color:var(--gray)">Runs small (EU sizing)</span>
           </div>
-          <div class="size-row">
+          <div class="size-row" style="grid-template-columns: 130px 1fr 1fr;">
             <span class="size-brand">H&amp;M</span>
-            <span class="size-val">2–4</span>
-            <span class="size-val">6–8</span>
-            <span class="size-val size-highlight">10–12</span>
-            <span class="size-val">14–16</span>
+            <span class="size-val">M</span>
+            <span class="size-val" style="font-size:0.7rem; color:var(--gray)">Slightly generous</span>
           </div>
-          <div class="size-row">
-            <span class="size-brand">Banana Republic</span>
-            <span class="size-val">00–0</span>
-            <span class="size-val">2–4</span>
-            <span class="size-val size-highlight">6–8</span>
-            <span class="size-val">10–12</span>
+          <div class="size-row" style="grid-template-columns: 130px 1fr 1fr;">
+            <span class="size-brand">Free People</span>
+            <span class="size-val">M</span>
+            <span class="size-val" style="font-size:0.7rem; color:var(--gray)">Runs small overall</span>
+          </div>
+          <div class="size-row" style="grid-template-columns: 130px 1fr 1fr;">
+            <span class="size-brand">LOFT</span>
+            <span class="size-val">10</span>
+            <span class="size-val" style="font-size:0.7rem; color:var(--gray)">Cuts run small</span>
+          </div>
+          <div class="size-row" style="grid-template-columns: 130px 1fr 1fr;">
+            <span class="size-brand">Old Navy</span>
+            <span class="size-val">XS–S</span>
+            <span class="size-val" style="font-size:0.7rem; color:var(--gray)">Runs very large</span>
+          </div>
+          <div class="size-row" style="grid-template-columns: 130px 1fr 1fr;">
+            <span class="size-brand">Target / UT</span>
+            <span class="size-val">S–M</span>
+            <span class="size-val" style="font-size:0.7rem; color:var(--gray)">Runs generously large</span>
+          </div>
+          <div class="size-row" style="grid-template-columns: 130px 1fr 1fr;">
+            <span class="size-brand">Banana Rep.</span>
+            <span class="size-val">8</span>
+            <span class="size-val" style="font-size:0.7rem; color:var(--gray)">Vanity sized, generous</span>
           </div>
           <div class="size-match-note">
-            ✓ All highlighted sizes are matched to each other — you'd see all of these closets
+            ✓ Her measurements stay constant — only the brand labels change
           </div>
         </div>
       </div>
@@ -1028,7 +1185,7 @@
         </div>
         <div class="example-info">
           <div class="example-name">Ashley · Bentonville</div>
-          <div class="example-size">Anthropologie 8 · Zara M · Size 8.5 shoe</div>
+          <div class="example-size">Bust 36" · Waist 28" · Hips 38" · Shoe 8.5</div>
           <div class="example-tags">
             <span class="ex-tag">Workwear</span>
             <span class="ex-tag">Casual</span>
@@ -1047,7 +1204,7 @@
         </div>
         <div class="example-info">
           <div class="example-name">Megan · Fayetteville</div>
-          <div class="example-size">Loft 10 · Gap M/L · Free People S</div>
+          <div class="example-size">Bust 38" · Waist 30" · Hips 40" · Shoe 9</div>
           <div class="example-tags">
             <span class="ex-tag">Boho</span>
             <span class="ex-tag">Accessories</span>
@@ -1066,7 +1223,7 @@
         </div>
         <div class="example-info">
           <div class="example-name">Sarah · Rogers</div>
-          <div class="example-size">Banana Republic 6 · ASOS 10 · Size 8 shoe</div>
+          <div class="example-size">Bust 34" · Waist 26" · Hips 36" · Shoe 7.5</div>
           <div class="example-tags">
             <span class="ex-tag">Date night</span>
             <span class="ex-tag">Seasonal</span>
@@ -1076,6 +1233,94 @@
         <div class="example-actions">
           <button class="ex-action" onclick="this.textContent='✕'">✕</button>
           <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CHAT / MATCH -->
+<section class="chat-section">
+  <div class="section-inner">
+    <div class="chat-demo">
+
+      <div class="chat-copy">
+        <div class="section-tag">When it clicks</div>
+        <h2 class="section-title">Mutual match → start chatting.</h2>
+        <p class="section-sub">When you and another woman both heart each other's closets, it's a match. A chat thread opens instantly — work out the details, pick a local coffee shop, and swap.</p>
+
+        <div class="chat-features">
+          <div class="chat-feature">
+            <div class="chat-feature-icon">💚</div>
+            <div>
+              <h4>Only mutual matches can chat</h4>
+              <p>Nobody can message you unless you've both liked each other's closets. No unsolicited messages, no strangers sliding in.</p>
+            </div>
+          </div>
+          <div class="chat-feature">
+            <div class="chat-feature-icon">📍</div>
+            <div>
+              <h4>Local meetup, your terms</h4>
+              <p>No shipping, no tracking numbers. Arrange a swap wherever you're comfortable — a coffee shop, farmers market, or parking lot works fine.</p>
+            </div>
+          </div>
+          <div class="chat-feature">
+            <div class="chat-feature-icon">🔄</div>
+            <div>
+              <h4>Trade or just give</h4>
+              <p>Swap one-for-one, or just give something away to a woman who loves it. No obligation to trade equal value.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-phone-wrap">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="screen-status">
+              <span>9:41</span>
+              <span>●●● ▲ ▌▌</span>
+            </div>
+            <div class="match-banner">
+              <div class="match-icon">💚</div>
+              <div>
+                <div class="match-title">It's a match!</div>
+                <div class="match-sub">You and Megan both liked each other</div>
+              </div>
+            </div>
+            <div class="chat-header">
+              <div class="chat-avatar">M</div>
+              <div>
+                <div class="chat-name">Megan · Fayetteville</div>
+                <div class="chat-online">● Online now</div>
+              </div>
+            </div>
+            <div class="chat-messages">
+              <div class="msg-row recv">
+                <div class="bubble recv">Hey! I love that green linen blazer 😍</div>
+              </div>
+              <div class="msg-row recv">
+                <div class="bubble recv">Would you want to swap it for my floral wrap dress?</div>
+              </div>
+              <div class="msg-row sent">
+                <div class="bubble sent">Yes!! I've been eyeing that dress forever 🌿</div>
+              </div>
+              <div class="msg-row recv">
+                <div class="bubble recv">Want to meet at Brightwater in Bentonville?</div>
+              </div>
+              <div class="msg-row sent">
+                <div class="bubble sent">Saturday morning works perfectly ✓</div>
+              </div>
+              <div class="msg-row recv">
+                <div class="bubble recv">See you then! So excited 🎉</div>
+              </div>
+            </div>
+            <div class="chat-input-bar">
+              <div class="chat-input-field">Type a message...</div>
+              <div class="chat-send">↑</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1119,13 +1364,13 @@
 <!-- SIGNUP -->
 <section id="signup" class="signup-section">
   <div class="section-inner">
-    <div class="section-tag">Early access</div>
-    <h2 class="section-title">Be the first to swap.</h2>
-    <p class="section-sub">Join the waitlist and we'll let you know when Thread NWA launches. Early members get first access and help shape the app.</p>
+    <div class="section-tag">Create your profile</div>
+    <h2 class="section-title">Start swapping today.</h2>
+    <p class="section-sub">Enter your real measurements — not brand labels — and we'll match you with women in NWA who actually fit the same clothes.</p>
 
     <div class="signup-form">
-      <!-- FORMSPREE: replace YOUR_FORM_ID below after creating a form at formspree.io -->
       <form id="waitlist-form">
+
         <div class="form-group">
           <label>Your name</label>
           <input type="text" name="name" placeholder="First name" id="f-name" />
@@ -1148,35 +1393,77 @@
           </select>
         </div>
 
-        <div style="margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 600; color: var(--charcoal); margin-top: 0.5rem;">Your typical sizes (you can add more in the app)</div>
+        <div class="measure-group-label">Brands you shop</div>
+        <p class="measure-hint" style="margin-bottom:0.75rem;">Select all that apply — this helps us understand how sizes run for you across the stores you actually buy from.</p>
+        <div class="brand-grid">
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-madewell" value="Madewell"><label for="b-madewell">Madewell</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-anthropologie" value="Anthropologie"><label for="b-anthropologie">Anthropologie</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-freepeople" value="Free People"><label for="b-freepeople">Free People</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-zara" value="Zara"><label for="b-zara">Zara</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-hm" value="H&M"><label for="b-hm">H&amp;M</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-loft" value="LOFT"><label for="b-loft">LOFT</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-jcrew" value="J.Crew"><label for="b-jcrew">J.Crew</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-br" value="Banana Republic"><label for="b-br">Banana Republic</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-gap" value="Gap"><label for="b-gap">Gap</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-oldnavy" value="Old Navy"><label for="b-oldnavy">Old Navy</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-target" value="Target / Universal Thread"><label for="b-target">Target / UT</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-walmart" value="Walmart / Time and Tru"><label for="b-walmart">Walmart</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-amazon" value="Amazon Essentials"><label for="b-amazon">Amazon</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-nordstrom" value="Nordstrom"><label for="b-nordstrom">Nordstrom</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-revolve" value="Revolve"><label for="b-revolve">Revolve</label></span>
+          <span class="brand-chip"><input type="checkbox" name="brands" id="b-asos" value="ASOS"><label for="b-asos">ASOS</label></span>
+        </div>
+
+        <div class="measure-group-label">Your measurements (in inches)</div>
+        <p class="measure-hint" style="margin-bottom:1rem;">Grab a soft tape measure. Measure the fullest part of each area. This is how we match you — no brand labels, no guessing.</p>
 
         <div class="form-row">
           <div class="form-group">
-            <label>Tops / Dresses</label>
-            <select name="top_size" id="f-top">
-              <option value="">Select</option>
-              <option>XS</option><option>S</option><option>M</option>
-              <option>L</option><option>XL</option><option>XXL</option>
-              <option>0</option><option>2</option><option>4</option>
-              <option>6</option><option>8</option><option>10</option>
-              <option>12</option><option>14</option><option>16</option>
-            </select>
+            <label>Bust</label>
+            <input type="number" name="bust" placeholder='e.g. 36"' id="f-bust" min="28" max="58" />
+            <div class="measure-hint">Fullest part of your chest</div>
           </div>
           <div class="form-group">
-            <label>Bottoms / Jeans</label>
-            <select name="bottom_size" id="f-bottom">
-              <option value="">Select</option>
-              <option>XS (24-25")</option><option>S (26-27")</option>
-              <option>M (28-29")</option><option>L (30-31")</option>
-              <option>XL (32-33")</option><option>XXL (34"+)</option>
-              <option>Size 24</option><option>Size 25</option><option>Size 26</option>
-              <option>Size 27</option><option>Size 28</option><option>Size 29</option>
-              <option>Size 30</option><option>Size 31</option><option>Size 32</option>
-            </select>
+            <label>Waist</label>
+            <input type="number" name="waist" placeholder='e.g. 28"' id="f-waist" min="20" max="50" />
+            <div class="measure-hint">Narrowest part of your torso</div>
           </div>
         </div>
 
         <div class="form-row">
+          <div class="form-group">
+            <label>Hips</label>
+            <input type="number" name="hips" placeholder='e.g. 38"' id="f-hips" min="30" max="60" />
+            <div class="measure-hint">Fullest part of your hips &amp; seat</div>
+          </div>
+          <div class="form-group">
+            <label>Height</label>
+            <select name="height" id="f-height">
+              <option value="">Select</option>
+              <option>Under 5'2" (petite)</option>
+              <option>5'2" – 5'4"</option>
+              <option>5'5" – 5'7"</option>
+              <option>5'8" – 5'10"</option>
+              <option>Over 5'10" (tall)</option>
+            </select>
+            <div class="measure-hint">Helps match dress &amp; inseam length</div>
+          </div>
+        </div>
+
+        <div class="measure-group-label">Bottoms &amp; shoes</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Jeans waist (inches)</label>
+            <select name="jeans_waist" id="f-jeans">
+              <option value="">Select</option>
+              <option>24</option><option>25</option><option>26</option>
+              <option>27</option><option>28</option><option>29</option>
+              <option>30</option><option>31</option><option>32</option>
+              <option>33</option><option>34</option><option>36+</option>
+            </select>
+            <div class="measure-hint">Your tape-measure waist, not your "jeans size"</div>
+          </div>
           <div class="form-group">
             <label>Shoe size (US Women's)</label>
             <select name="shoe_size" id="f-shoe">
@@ -1185,35 +1472,19 @@
               <option>6.5</option><option>7</option><option>7.5</option>
               <option>8</option><option>8.5</option><option>9</option>
               <option>9.5</option><option>10</option><option>10.5</option>
-              <option>11</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Favorite brand to shop</label>
-            <select name="favorite_brand" id="f-brand">
-              <option value="">Select</option>
-              <option>Anthropologie</option>
-              <option>Banana Republic</option>
-              <option>Free People</option>
-              <option>H&M</option>
-              <option>Loft</option>
-              <option>Madewell</option>
-              <option>Nordstrom</option>
-              <option>Target / Universal Thread</option>
-              <option>Zara</option>
-              <option>Other</option>
+              <option>11</option><option>11.5</option><option>12</option>
             </select>
           </div>
         </div>
 
-        <button type="submit" class="btn-submit">Join the waitlist →</button>
-        <p class="form-note">No spam, ever. We'll only email you when Thread NWA is ready to launch in your area.</p>
+        <button type="submit" class="btn-submit">Create my profile →</button>
+        <p class="form-note">Free forever. No shipping, no fees, no catch — just women in NWA swapping clothes that fit.</p>
       </form>
 
       <div class="success-msg" id="success-msg">
         <div class="checkmark">💚</div>
-        <h3>You're on the list!</h3>
-        <p>We'll reach out as soon as Thread NWA launches in Northwest Arkansas. Get ready to refresh your wardrobe — for free.</p>
+        <h3>Profile created!</h3>
+        <p>You're in. We'll reach out as soon as Thread NWA is live so you can start browsing closets near you.</p>
       </div>
     </div>
   </div>
@@ -1227,9 +1498,9 @@
 
 <script>
   // ─── GOOGLE SHEETS SETUP ────────────────────────────────────────────────────
-  // 1. Go to sheets.google.com → create a new sheet named "ThreadNWA Waitlist"
+  // 1. Go to sheets.google.com → create a new sheet named "ThreadNWA"
   // 2. Add these headers in Row 1:
-  //    Timestamp | Name | Email | City | Top Size | Bottom Size | Shoe Size | Favorite Brand
+  //    Timestamp | Name | Email | City | Brands | Bust | Waist | Hips | Height | Jeans Waist | Shoe Size
   // 3. Open Extensions → Apps Script → paste the doPost() code below → Save
   //    → Deploy → New deployment → Web app
   //    (Execute as: Me · Who has access: Anyone) → copy the Web App URL
@@ -1240,8 +1511,8 @@
   //   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   //   const d = JSON.parse(e.postData.contents);
   //   sheet.appendRow([
-  //     new Date(), d.name, d.email, d.city,
-  //     d.top_size, d.bottom_size, d.shoe_size, d.favorite_brand
+  //     new Date(), d.name, d.email, d.city, d.brands,
+  //     d.bust, d.waist, d.hips, d.height, d.jeans_waist, d.shoe_size
   //   ]);
   //   return ContentService
   //     .createTextOutput('OK')
@@ -1263,14 +1534,20 @@
     btn.textContent = 'Joining...';
     btn.disabled = true;
 
+    const brands = [...document.querySelectorAll('input[name="brands"]:checked')]
+                     .map(cb => cb.value).join(', ');
+
     const payload = {
       name,
       email,
-      city:           document.getElementById('f-city').value,
-      top_size:       document.getElementById('f-top').value,
-      bottom_size:    document.getElementById('f-bottom').value,
-      shoe_size:      document.getElementById('f-shoe').value,
-      favorite_brand: document.getElementById('f-brand').value,
+      city:        document.getElementById('f-city').value,
+      brands,
+      bust:        document.getElementById('f-bust').value,
+      waist:       document.getElementById('f-waist').value,
+      hips:        document.getElementById('f-hips').value,
+      height:      document.getElementById('f-height').value,
+      jeans_waist: document.getElementById('f-jeans').value,
+      shoe_size:   document.getElementById('f-shoe').value,
     };
 
     try {
