@@ -729,6 +729,13 @@
       border-color: var(--sage-dark);
     }
 
+    .form-group select:disabled {
+      background: var(--light-gray);
+      color: var(--gray);
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1366,7 +1373,7 @@
   <div class="section-inner">
     <div class="section-tag">Create your profile</div>
     <h2 class="section-title">Start swapping today.</h2>
-    <p class="section-sub">Enter your real measurements — not brand labels — and we'll match you with women in NWA who actually fit the same clothes.</p>
+    <p class="section-sub">Pick a brand, pick your size — that's all we need to match you with women in NWA wearing the same clothes.</p>
 
     <div class="signup-form">
       <form id="waitlist-form">
@@ -1393,88 +1400,89 @@
           </select>
         </div>
 
-        <div class="measure-group-label">Brands you shop</div>
-        <p class="measure-hint" style="margin-bottom:0.75rem;">Select all that apply — this helps us understand how sizes run for you across the stores you actually buy from.</p>
-        <div class="brand-grid">
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-madewell" value="Madewell"><label for="b-madewell">Madewell</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-anthropologie" value="Anthropologie"><label for="b-anthropologie">Anthropologie</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-freepeople" value="Free People"><label for="b-freepeople">Free People</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-zara" value="Zara"><label for="b-zara">Zara</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-hm" value="H&M"><label for="b-hm">H&amp;M</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-loft" value="LOFT"><label for="b-loft">LOFT</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-jcrew" value="J.Crew"><label for="b-jcrew">J.Crew</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-br" value="Banana Republic"><label for="b-br">Banana Republic</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-gap" value="Gap"><label for="b-gap">Gap</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-oldnavy" value="Old Navy"><label for="b-oldnavy">Old Navy</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-target" value="Target / Universal Thread"><label for="b-target">Target / UT</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-walmart" value="Walmart / Time and Tru"><label for="b-walmart">Walmart</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-amazon" value="Amazon Essentials"><label for="b-amazon">Amazon</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-nordstrom" value="Nordstrom"><label for="b-nordstrom">Nordstrom</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-revolve" value="Revolve"><label for="b-revolve">Revolve</label></span>
-          <span class="brand-chip"><input type="checkbox" name="brands" id="b-asos" value="ASOS"><label for="b-asos">ASOS</label></span>
-        </div>
-
-        <div class="measure-group-label">Your measurements (in inches)</div>
-        <p class="measure-hint" style="margin-bottom:1rem;">Grab a soft tape measure. Measure the fullest part of each area. This is how we match you — no brand labels, no guessing.</p>
+        <div class="measure-group-label">Your sizes</div>
+        <p class="measure-hint" style="margin-bottom:1rem;">Pick a brand you shop regularly, then choose your size there. No tape measure needed.</p>
 
         <div class="form-row">
           <div class="form-group">
-            <label>Bust</label>
-            <input type="number" name="bust" placeholder='e.g. 36"' id="f-bust" min="28" max="58" />
-            <div class="measure-hint">Fullest part of your chest</div>
+            <label>Brand</label>
+            <select id="f-brand1" name="brand1" onchange="updateSizes('f-size1', this.value)">
+              <option value="">Select a brand</option>
+              <option>Anthropologie</option><option>Banana Republic</option>
+              <option>Free People</option><option>Gap</option>
+              <option>H&amp;M</option><option>J.Crew</option>
+              <option>LOFT</option><option>Madewell</option>
+              <option>Nordstrom</option><option>Old Navy</option>
+              <option>Revolve</option><option>Target / Universal Thread</option>
+              <option>Walmart</option><option>Zara</option>
+              <option>Amazon</option><option>ASOS</option>
+            </select>
           </div>
           <div class="form-group">
-            <label>Waist</label>
-            <input type="number" name="waist" placeholder='e.g. 28"' id="f-waist" min="20" max="50" />
-            <div class="measure-hint">Narrowest part of your torso</div>
+            <label>Your size there</label>
+            <select id="f-size1" name="size1" disabled>
+              <option value="">← Pick a brand first</option>
+            </select>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label>Hips</label>
-            <input type="number" name="hips" placeholder='e.g. 38"' id="f-hips" min="30" max="60" />
-            <div class="measure-hint">Fullest part of your hips &amp; seat</div>
+            <label>Second brand <span style="font-weight:400;color:var(--gray)">(optional)</span></label>
+            <select id="f-brand2" name="brand2" onchange="updateSizes('f-size2', this.value)">
+              <option value="">Select a brand</option>
+              <option>Anthropologie</option><option>Banana Republic</option>
+              <option>Free People</option><option>Gap</option>
+              <option>H&amp;M</option><option>J.Crew</option>
+              <option>LOFT</option><option>Madewell</option>
+              <option>Nordstrom</option><option>Old Navy</option>
+              <option>Revolve</option><option>Target / Universal Thread</option>
+              <option>Walmart</option><option>Zara</option>
+              <option>Amazon</option><option>ASOS</option>
+            </select>
           </div>
           <div class="form-group">
-            <label>Height</label>
-            <select name="height" id="f-height">
-              <option value="">Select</option>
-              <option>Under 5'2" (petite)</option>
-              <option>5'2" – 5'4"</option>
-              <option>5'5" – 5'7"</option>
-              <option>5'8" – 5'10"</option>
-              <option>Over 5'10" (tall)</option>
+            <label>Your size there</label>
+            <select id="f-size2" name="size2" disabled>
+              <option value="">← Pick a brand first</option>
             </select>
-            <div class="measure-hint">Helps match dress &amp; inseam length</div>
           </div>
         </div>
 
-        <div class="measure-group-label">Bottoms &amp; shoes</div>
+        <div class="measure-group-label">Jeans &amp; shoes</div>
 
         <div class="form-row">
           <div class="form-group">
-            <label>Jeans waist (inches)</label>
-            <select name="jeans_waist" id="f-jeans">
-              <option value="">Select</option>
-              <option>24</option><option>25</option><option>26</option>
-              <option>27</option><option>28</option><option>29</option>
-              <option>30</option><option>31</option><option>32</option>
-              <option>33</option><option>34</option><option>36+</option>
+            <label>Jeans brand</label>
+            <select id="f-jeans-brand" name="jeans_brand" onchange="updateJeansSizes('f-jeans', this.value)">
+              <option value="">Select a brand</option>
+              <option>Madewell</option><option>Levi's</option>
+              <option>AGOLDE</option><option>Frame</option>
+              <option>Paige</option><option>Citizens of Humanity</option>
+              <option>American Eagle</option><option>Lucky Brand</option>
+              <option>Gap</option><option>H&amp;M</option>
+              <option>Zara</option><option>Free People</option>
+              <option>Old Navy</option><option>Target / Universal Thread</option>
             </select>
-            <div class="measure-hint">Your tape-measure waist, not your "jeans size"</div>
           </div>
           <div class="form-group">
-            <label>Shoe size (US Women's)</label>
-            <select name="shoe_size" id="f-shoe">
-              <option value="">Select</option>
-              <option>5</option><option>5.5</option><option>6</option>
-              <option>6.5</option><option>7</option><option>7.5</option>
-              <option>8</option><option>8.5</option><option>9</option>
-              <option>9.5</option><option>10</option><option>10.5</option>
-              <option>11</option><option>11.5</option><option>12</option>
+            <label>Your jeans size</label>
+            <select id="f-jeans" name="jeans_size" disabled>
+              <option value="">← Pick a brand first</option>
             </select>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label>Shoe size (US Women's)</label>
+          <select name="shoe_size" id="f-shoe">
+            <option value="">Select</option>
+            <option>5</option><option>5.5</option><option>6</option>
+            <option>6.5</option><option>7</option><option>7.5</option>
+            <option>8</option><option>8.5</option><option>9</option>
+            <option>9.5</option><option>10</option><option>10.5</option>
+            <option>11</option><option>11.5</option><option>12</option>
+          </select>
         </div>
 
         <button type="submit" class="btn-submit">Create my profile →</button>
@@ -1500,7 +1508,7 @@
   // ─── GOOGLE SHEETS SETUP ────────────────────────────────────────────────────
   // 1. Go to sheets.google.com → create a new sheet named "ThreadNWA"
   // 2. Add these headers in Row 1:
-  //    Timestamp | Name | Email | City | Brands | Bust | Waist | Hips | Height | Jeans Waist | Shoe Size
+  //    Timestamp | Name | Email | City | Brand 1 | Size 1 | Brand 2 | Size 2 | Jeans Brand | Jeans Size | Shoe Size
   // 3. Open Extensions → Apps Script → paste the doPost() code below → Save
   //    → Deploy → New deployment → Web app
   //    (Execute as: Me · Who has access: Anyone) → copy the Web App URL
@@ -1511,8 +1519,9 @@
   //   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   //   const d = JSON.parse(e.postData.contents);
   //   sheet.appendRow([
-  //     new Date(), d.name, d.email, d.city, d.brands,
-  //     d.bust, d.waist, d.hips, d.height, d.jeans_waist, d.shoe_size
+  //     new Date(), d.name, d.email, d.city,
+  //     d.brand1, d.size1, d.brand2, d.size2,
+  //     d.jeans_brand, d.jeans_size, d.shoe_size
   //   ]);
   //   return ContentService
   //     .createTextOutput('OK')
@@ -1521,6 +1530,72 @@
   // ────────────────────────────────────────────────────────────────────────────
 
   const SHEETS_ENDPOINT = 'YOUR_APPS_SCRIPT_URL';
+
+  // Brand → size options for tops/dresses
+  const brandSizes = {
+    'Anthropologie':           ['00','0','2','4','6','8','10','12','14','16'],
+    'Banana Republic':         ['00','0','2','4','6','8','10','12','14','16'],
+    'J.Crew':                  ['000','00','0','2','4','6','8','10','12','14','16'],
+    'LOFT':                    ['00','0','2','4','6','8','10','12','14','16','18','20'],
+    'Madewell':                ['XS','S','M','L','XL','0','2','4','6','8','10','12','14'],
+    'Free People':             ['XS','S','M','L','XL'],
+    'Gap':                     ['XS','S','M','L','XL','XXL'],
+    'H&M':                     ['XS','S','M','L','XL','XXL'],
+    'Old Navy':                ['XS','S','M','L','XL','XXL','1X','2X','3X'],
+    'Target / Universal Thread':['XS','S','M','L','XL','XXL','1X','2X','3X'],
+    'Walmart':                 ['XS','S','M','L','XL','XXL','1X','2X','3X','4X'],
+    'Zara':                    ['XS','S','M','L','XL'],
+    'Amazon':                  ['XS','S','M','L','XL','XXL','1X','2X','3X'],
+    'ASOS':                    ['4','6','8','10','12','14','16','18','20'],
+    'Nordstrom':               ['XS','S','M','L','XL','XXL'],
+    'Revolve':                 ['XS','S','M','L'],
+  };
+
+  // Brand → size options for jeans
+  const jeansBrandSizes = {
+    'Madewell':                ['23','24','25','26','27','28','29','30','31','32','33','34'],
+    "Levi's":                  ['24','25','26','27','28','29','30','31','32','33','34'],
+    'AGOLDE':                  ['23','24','25','26','27','28','29','30','31','32'],
+    'Frame':                   ['23','24','25','26','27','28','29','30','31','32'],
+    'Paige':                   ['23','24','25','26','27','28','29','30','31','32'],
+    'Citizens of Humanity':    ['23','24','25','26','27','28','29','30','31','32'],
+    'American Eagle':          ['00','0','2','4','6','8','10','12','14','16','18','20'],
+    'Lucky Brand':             ['00','0','2','4','6','8','10','12','14','16'],
+    'Gap':                     ['24','25','26','27','28','29','30','31','32','33','34'],
+    'H&M':                     ['32','34','36','38','40','42','44'],
+    'Zara':                    ['32','34','36','38','40','42'],
+    'Free People':             ['24','25','26','27','28','29','30','31','32'],
+    'Old Navy':                ['0','2','4','6','8','10','12','14','16','18','20'],
+    'Target / Universal Thread':['0','2','4','6','8','10','12','14','16'],
+  };
+
+  function updateSizes(sizeId, brand) {
+    const el = document.getElementById(sizeId);
+    el.innerHTML = '';
+    if (!brand) {
+      el.innerHTML = '<option value="">← Pick a brand first</option>';
+      el.disabled = true;
+      return;
+    }
+    const sizes = brandSizes[brand] || ['XS','S','M','L','XL','XXL','0','2','4','6','8','10','12','14','16'];
+    el.innerHTML = '<option value="">Select your size</option>' +
+      sizes.map(s => `<option>${s}</option>`).join('');
+    el.disabled = false;
+  }
+
+  function updateJeansSizes(sizeId, brand) {
+    const el = document.getElementById(sizeId);
+    el.innerHTML = '';
+    if (!brand) {
+      el.innerHTML = '<option value="">← Pick a brand first</option>';
+      el.disabled = true;
+      return;
+    }
+    const sizes = jeansBrandSizes[brand] || ['24','25','26','27','28','29','30','31','32','33','34'];
+    el.innerHTML = '<option value="">Select your size</option>' +
+      sizes.map(s => `<option>${s}</option>`).join('');
+    el.disabled = false;
+  }
 
   document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -1534,19 +1609,16 @@
     btn.textContent = 'Joining...';
     btn.disabled = true;
 
-    const brands = [...document.querySelectorAll('input[name="brands"]:checked')]
-                     .map(cb => cb.value).join(', ');
-
     const payload = {
       name,
       email,
       city:        document.getElementById('f-city').value,
-      brands,
-      bust:        document.getElementById('f-bust').value,
-      waist:       document.getElementById('f-waist').value,
-      hips:        document.getElementById('f-hips').value,
-      height:      document.getElementById('f-height').value,
-      jeans_waist: document.getElementById('f-jeans').value,
+      brand1:      document.getElementById('f-brand1').value,
+      size1:       document.getElementById('f-size1').value,
+      brand2:      document.getElementById('f-brand2').value,
+      size2:       document.getElementById('f-size2').value,
+      jeans_brand: document.getElementById('f-jeans-brand').value,
+      jeans_size:  document.getElementById('f-jeans').value,
       shoe_size:   document.getElementById('f-shoe').value,
     };
 
