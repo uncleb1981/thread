@@ -33,9 +33,29 @@
     }
 
     /* NAV */
-    nav {
+    /* ANNOUNCEMENT BAR */
+    .announce-bar {
       position: fixed;
       top: 0; left: 0; right: 0;
+      z-index: 101;
+      background: var(--blush-light);
+      border-bottom: 1px solid var(--blush);
+      text-align: center;
+      padding: 0.45rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #7A4A35;
+      line-height: 1.4;
+    }
+    .announce-bar a {
+      color: #7A4A35;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    nav {
+      position: fixed;
+      top: 36px; left: 0; right: 0;
       z-index: 100;
       background: rgba(250, 247, 244, 0.92);
       backdrop-filter: blur(12px);
@@ -65,6 +85,8 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--charcoal); }
+    .nav-links a.btn-primary,
+    .nav-links a.btn-primary:hover { color: #fff; }
 
     .btn-primary {
       background: var(--sage-dark);
@@ -890,6 +912,40 @@
       font-size: 0.65rem; cursor: pointer;
     }
 
+    .msngr-bar {
+      padding: 0.45rem 0.6rem;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+
+    .msngr-btn-phone {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      width: 100%;
+      background: #0084FF;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 0.42rem 0.6rem;
+      font-size: 0.62rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .msngr-icon {
+      width: 13px; height: 13px;
+      background: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.5rem;
+      color: #0084FF;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
     /* BRAND CHIPS */
     .brand-grid {
       display: flex;
@@ -973,9 +1029,373 @@
       .nwa-stats { flex-wrap: wrap; }
       .nav-links .nav-hide { display: none; }
     }
+
+    /* ── 1. SOCIAL PROOF BAR ─────────────────────────────────── */
+    .social-proof {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .sp-avatars {
+      display: flex;
+    }
+
+    .sp-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 700; color: white;
+      margin-left: -8px;
+      flex-shrink: 0;
+    }
+    .sp-avatars .sp-avatar:first-child { margin-left: 0; }
+
+    .sp-text {
+      font-size: 0.82rem;
+      color: var(--gray);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .sp-text strong { color: var(--sage-dark); }
+
+    /* ── 3. TESTIMONIAL QUOTE ────────────────────────────────── */
+    .hero-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #C47B5A;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--blush);
+    }
+    .hero-quote cite {
+      display: block;
+      font-style: normal;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gray);
+      margin-top: 0.4rem;
+    }
+
+    /* ── 4. ITEM CAROUSEL ────────────────────────────────────── */
+    .carousel-section { background: var(--cream); padding-bottom: 0; }
+
+    .carousel-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 1rem 0 1.5rem;
+      margin: 0 -5%;
+      padding-left: 5%;
+      padding-right: 5%;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .item-card {
+      flex: 0 0 200px;
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      scroll-snap-align: start;
+      transition: transform 0.2s;
+    }
+    .item-card:hover { transform: translateY(-3px); }
+
+    .item-photo {
+      height: 180px;
+      overflow: hidden;
+    }
+    .item-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .item-info { padding: 0.75rem; }
+
+    .item-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.2rem;
+    }
+
+    .item-size {
+      font-size: 0.72rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .item-saves {
+      font-size: 0.7rem;
+      color: var(--blush);
+      font-weight: 600;
+    }
+
+    .carousel-hint {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+      padding-bottom: 2rem;
+    }
+
+    /* ── 6. SAFETY SECTION ───────────────────────────────────── */
+    .safety-section {
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .safety-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .safety-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .safety-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--charcoal);
+    }
+
+    .safety-card p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ── 7. STICKY MOBILE CTA BAR ────────────────────────────── */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--sage-dark);
+      color: white;
+      padding: 0.85rem 1.2rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    }
+
+    .sticky-cta.visible { display: flex; }
+
+    .sticky-cta-text {
+      font-size: 0.8rem;
+      font-weight: 500;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .sticky-cta-btn {
+      background: white;
+      color: var(--sage-dark);
+      border: none;
+      border-radius: 100px;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .sticky-cta-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* ── 2. MULTI-STEP FORM ──────────────────────────────────── */
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .step-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s;
+    }
+    .step-dot.active { background: var(--sage-dark); }
+
+    .step2-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .step2-header h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+    .step2-header p {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    .btn-skip {
+      display: block;
+      text-align: center;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--gray);
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      width: 100%;
+    }
+
+    /* ── PHOTO DROP ZONE ─────────────────────────────────────── */
+    .photo-drop {
+      position: relative;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      cursor: pointer;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .photo-drop-inner {
+      width: 100%; height: 100%;
+      border: 2px dashed var(--border);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--light-gray);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .photo-drop:hover .photo-drop-inner,
+    .photo-drop.dragging .photo-drop-inner {
+      border-color: var(--sage-dark);
+      background: var(--blush-light);
+    }
+    .photo-drop-icon { font-size: 1.4rem; margin-bottom: 0.2rem; }
+    .photo-drop-inner p { font-size: 0.6rem; color: var(--gray); text-align: center; line-height: 1.4; margin: 0; }
+    .photo-drop-inner p span { display: block; color: var(--sage-dark); font-weight: 600; }
+    #photo-preview {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 50%;
+      display: none;
+    }
+
+    /* ── BRAND SIZE GRID ─────────────────────────────────────── */
+    .bsg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+    }
+    .bsg-row {
+      display: flex; align-items: center;
+      gap: 0.5rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.45rem 0.75rem;
+    }
+    .bsg-label {
+      font-size: 0.73rem; font-weight: 600;
+      color: var(--charcoal); flex: 1;
+      white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .bsg-select {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.22rem 0.35rem;
+      background: var(--cream);
+      color: var(--charcoal);
+      outline: none; cursor: pointer;
+      width: 72px; flex-shrink: 0;
+      appearance: none;
+    }
+    .bsg-select:focus { border-color: var(--sage-dark); }
+    @media (max-width: 380px) { .bsg-grid { grid-template-columns: 1fr; } }
+
+    /* ── 5. MOBILE HERO FIXES (≤430px) ──────────────────────── */
+    @media (max-width: 430px) {
+      .hero-badges {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+        justify-content: flex-start;
+      }
+      .hero-badges::-webkit-scrollbar { display: none; }
+      .badge { white-space: nowrap; flex-shrink: 0; }
+
+      .hero-visual { display: none; }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .hero-cta .btn-primary {
+        text-align: center;
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+      }
+      .hero-cta .btn-secondary {
+        text-align: center;
+        font-size: 0.9rem;
+        justify-content: center;
+        text-decoration: underline;
+        color: var(--gray);
+      }
+
+      .safety-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+      .sticky-cta.visible { display: flex; }
+    }
+
+    @media (min-width: 431px) {
+      .sticky-cta { display: none !important; }
+    }
   </style>
 </head>
 <body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">
+  🌱 Thread NWA is brand new — we're still working out the kinks. Found a bug or have feedback? <a href="mailto:hello@threadnwa.com">Tell us →</a>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -988,7 +1408,7 @@
 </nav>
 
 <!-- HERO -->
-<section style="padding-top: 0;">
+<section style="padding-top: 36px;">
   <div class="hero">
     <div class="hero-text">
       <div class="hero-badges">
@@ -997,7 +1417,28 @@
         <span class="badge">Size-Matched</span>
       </div>
       <h1>Swap clothes.<br /><em>Not cash.</em></h1>
+
+      <!-- Social proof -->
+      <div class="social-proof">
+        <div class="sp-avatars">
+          <div class="sp-avatar" style="background:#C9A587;">S</div>
+          <div class="sp-avatar" style="background:#8BAF8A;">M</div>
+          <div class="sp-avatar" style="background:#D4A5A5;">A</div>
+          <div class="sp-avatar" style="background:#A8B8C8;">J</div>
+          <div class="sp-avatar" style="background:#C4B5A0;">R</div>
+          <div class="sp-avatar" style="background:#B5A8C9;">K</div>
+        </div>
+        <div class="sp-text"><strong>47 women</strong> already signed up in NWA — join them</div>
+      </div>
+
       <p>Thread NWA connects women in NWA to exchange clothing they love but no longer wear — matched to your exact size across every brand, for free.</p>
+
+      <!-- Testimonial -->
+      <blockquote class="hero-quote">
+        "I got four pieces I actually wear. Gave away six I never did. Zero dollars spent."
+        <cite>— Sarah, Bentonville</cite>
+      </blockquote>
+
       <div class="hero-cta">
         <a href="#signup" class="btn-primary">Start swapping free →</a>
         <a href="#how" class="btn-secondary">See how it works ↓</a>
@@ -1060,15 +1501,15 @@
 <section id="how" class="how-bg">
   <div class="section-inner">
     <div class="section-tag">How it works</div>
-    <h2 class="section-title">Tinder for your closet.</h2>
-    <p class="section-sub">Browse women's closets in NWA who are your exact size. Heart the ones you love, skip the rest — it's that simple.</p>
+    <h2 class="section-title">Trade your closet, update your look.</h2>
+    <p class="section-sub">Browse closets from women in NWA who wear your same brands and sizes. Heart the ones you love, skip the rest — it's that simple.</p>
 
     <div class="steps">
       <div class="step">
         <div class="step-connector"></div>
         <div class="step-number">1</div>
         <h3>Set your sizes</h3>
-        <p>Enter your actual measurements — bust, waist, hips. Not brand labels, not S/M/L guesses. We use the numbers that never lie.</p>
+        <p>Tell us your size in the brands you actually wear — Madewell, Zara, Free People, and more. No measuring tape needed.</p>
       </div>
       <div class="step">
         <div class="step-connector"></div>
@@ -1092,22 +1533,22 @@
     <div class="size-grid">
       <div>
         <div class="section-tag">Real sizing</div>
-        <h2 class="section-title">One body.<br/>Eight different labels.<br/><em style="font-style:italic; color:var(--sage-dark)">We ignore them all.</em></h2>
-        <p class="section-sub" style="margin-bottom: 2rem;">Brand sizing is marketing, not math. A "Medium" at Old Navy is a completely different garment than a "Medium" at Free People. We skip the labels entirely and match on your actual measurements — the only number that doesn't lie.</p>
+        <h2 class="section-title">One body.<br/>Ten different sizes.<br/><em style="font-style:italic; color:var(--sage-dark)">We match on all of them.</em></h2>
+        <p class="section-sub" style="margin-bottom: 2rem;">A size 8 at Madewell fits nothing like a size 8 at Zara. We collect your actual size in each brand you wear — so when we find you a match, the clothes will actually fit.</p>
 
         <div class="size-features">
           <div class="size-feature">
-            <div class="size-feature-icon">📏</div>
+            <div class="size-feature-icon">🏷️</div>
             <div>
-              <h4>Measurements first, always</h4>
-              <p>Enter your bust, waist, and hips in inches. That's it. We handle every brand translation behind the scenes.</p>
+              <h4>Per-brand sizes, not guesswork</h4>
+              <p>Tell us your size in the brands you wear. We match you with closets that carry the same brands in the same sizes — no surprises at the swap.</p>
             </div>
           </div>
           <div class="size-feature">
             <div class="size-feature-icon">👖</div>
             <div>
-              <h4>Jeans use your actual waist</h4>
-              <p>We ask for your numeric waist measurement — not "Size 28" (which varies 1–2" across brands) but your real tape-measure inch.</p>
+              <h4>Jeans by waist size</h4>
+              <p>Denim sizing still varies wildly. We use your numeric waist size so your match's jeans will actually button.</p>
             </div>
           </div>
           <div class="size-feature">
@@ -1122,7 +1563,7 @@
 
       <div>
         <div class="size-table">
-          <div class="size-table-title">Same woman · Bust 36" · Waist 28" · Hips 38"</div>
+          <div class="size-table-title">Same woman — different sizes across brands</div>
           <div class="size-row size-row-header" style="grid-template-columns: 130px 1fr 1fr;">
             <span>Brand</span>
             <span style="text-align:center">Label she buys</span>
@@ -1247,6 +1688,58 @@
   </div>
 </section>
 
+<!-- ITEM CAROUSEL -->
+<section class="carousel-section">
+  <div class="section-inner" style="padding-bottom:0;">
+    <div class="section-tag">Individual items</div>
+    <h2 class="section-title">Browse piece by piece.</h2>
+    <p class="section-sub">Swipe through individual items from closets near you — each one sized and saved by real women in NWA.</p>
+  </div>
+  <div class="carousel-track">
+    <div class="item-card">
+      <div class="item-photo"><img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=300&h=300&fit=crop&auto=format" alt="White blouse" /></div>
+      <div class="item-info">
+        <div class="item-name">Linen Wrap Blouse</div>
+        <div class="item-size">Madewell · Size 6</div>
+        <div class="item-saves">❤️ saved by 8 women</div>
+      </div>
+    </div>
+    <div class="item-card">
+      <div class="item-photo"><img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?w=300&h=300&fit=crop&auto=format" alt="White dress" /></div>
+      <div class="item-info">
+        <div class="item-name">Cotton Midi Dress</div>
+        <div class="item-size">Anthropologie · Size 4</div>
+        <div class="item-saves">❤️ saved by 14 women</div>
+      </div>
+    </div>
+    <div class="item-card">
+      <div class="item-photo"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=300&h=300&fit=crop&auto=format" alt="Knit sweater" /></div>
+      <div class="item-info">
+        <div class="item-name">Cream Knit Pullover</div>
+        <div class="item-size">Free People · S</div>
+        <div class="item-saves">❤️ saved by 6 women</div>
+      </div>
+    </div>
+    <div class="item-card">
+      <div class="item-photo"><img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=300&h=300&fit=crop&auto=format" alt="Dresses on rack" /></div>
+      <div class="item-info">
+        <div class="item-name">Floral Wrap Dress</div>
+        <div class="item-size">Zara · M</div>
+        <div class="item-saves">❤️ saved by 11 women</div>
+      </div>
+    </div>
+    <div class="item-card">
+      <div class="item-photo"><img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=300&h=300&fit=crop&auto=format" alt="Tops on hangers" /></div>
+      <div class="item-info">
+        <div class="item-name">Striped Button-Down</div>
+        <div class="item-size">J.Crew · Size 8</div>
+        <div class="item-saves">❤️ saved by 5 women</div>
+      </div>
+    </div>
+  </div>
+  <p class="carousel-hint">← swipe to browse →</p>
+</section>
+
 <!-- CHAT / MATCH -->
 <section class="chat-section">
   <div class="section-inner">
@@ -1277,6 +1770,13 @@
             <div>
               <h4>Trade or just give</h4>
               <p>Swap one-for-one, or just give something away to a woman who loves it. No obligation to trade equal value.</p>
+            </div>
+          </div>
+          <div class="chat-feature">
+            <div class="chat-feature-icon" style="background:#E3F0FF;">💬</div>
+            <div>
+              <h4>Jump to Messenger in one tap</h4>
+              <p>Once matched, open a Facebook Messenger conversation instantly — no phone numbers exchanged, no new apps to download.</p>
             </div>
           </div>
         </div>
@@ -1327,10 +1827,43 @@
               <div class="chat-input-field">Type a message...</div>
               <div class="chat-send">↑</div>
             </div>
+            <div class="msngr-bar">
+              <a href="https://m.me" target="_blank" rel="noopener" class="msngr-btn-phone">
+                <span class="msngr-icon">✦</span>
+                Open in Messenger
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY / TRUST -->
+<section class="safety-section">
+  <div class="section-inner">
+    <div class="section-tag">Your safety</div>
+    <h2 class="section-title">Feel safe the whole time.</h2>
+    <p class="section-sub">Thread NWA is built around consent and control. You decide who sees you, when you chat, and where you meet.</p>
+
+    <div class="safety-grid">
+      <div class="safety-card">
+        <div class="safety-icon">🔒</div>
+        <h4>Your sizes stay private</h4>
+        <p>We never display your measurements to other users. Matching happens behind the scenes — only you know what you entered.</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">💚</div>
+        <h4>Mutual likes required to chat</h4>
+        <p>No one can message you unless you've both expressed interest. You're always in control of who can reach you.</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">📍</div>
+        <h4>You choose the meetup spot</h4>
+        <p>Pick any public place you're comfortable with — a coffee shop, a farmers market, anywhere in NWA that feels right to you.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1372,21 +1905,36 @@
 <section id="signup" class="signup-section">
   <div class="section-inner">
     <div class="section-tag">Create your profile</div>
-    <h2 class="section-title">Start swapping today.</h2>
-    <p class="section-sub">Pick a brand, pick your size — that's all we need to match you with women in NWA wearing the same clothes.</p>
+    <h2 class="section-title">Join Thread NWA.</h2>
+    <p class="section-sub">Upload a photo of your closet showing the pieces you want to trade, pick your sizes by brand, and we'll find your best matches in NWA.</p>
 
     <div class="signup-form">
       <form id="waitlist-form">
 
-        <div class="form-group">
-          <label>Your name</label>
-          <input type="text" name="name" placeholder="First name" id="f-name" />
+        <!-- Photo drop -->
+        <div class="photo-drop" id="photo-drop" title="Add a photo of your closet">
+          <input type="file" accept="image/*" id="photo-input" hidden />
+          <div class="photo-drop-inner" id="photo-drop-inner">
+            <div class="photo-drop-icon">🧥</div>
+            <p>Closet photo<span>pieces to trade</span></p>
+          </div>
+          <img id="photo-preview" alt="Your photo" />
         </div>
-        <div class="form-group">
-          <label>Email address</label>
-          <input type="email" name="email" placeholder="you@email.com" id="f-email" />
+
+        <!-- Name + Email -->
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>First name</label>
+            <input type="text" id="f-name" name="name" placeholder="First name" />
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Email</label>
+            <input type="email" id="f-email" name="email" placeholder="you@email.com" />
+          </div>
         </div>
-        <div class="form-group">
+
+        <!-- Location -->
+        <div class="form-group" style="margin-top:1.2rem;">
           <label>Where are you in NWA?</label>
           <select name="city" id="f-city">
             <option value="">Select your city</option>
@@ -1400,99 +1948,123 @@
           </select>
         </div>
 
-        <div class="measure-group-label">Your sizes</div>
-        <p class="measure-hint" style="margin-bottom:1rem;">Pick a brand you shop regularly, then choose your size there. No tape measure needed.</p>
+        <!-- Brand sizes -->
+        <div class="measure-group-label">
+          Your sizes by brand
+          <span style="font-weight:400;color:var(--gray);text-transform:none;letter-spacing:0;font-size:0.75rem;"> — select what you wear</span>
+        </div>
+        <div class="bsg-grid">
+          <div class="bsg-row">
+            <span class="bsg-label">Madewell</span>
+            <select class="bsg-select" name="sz_madewell">
+              <option value="">—</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
+              <option>0</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option>14</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Anthropologie</span>
+            <select class="bsg-select" name="sz_anthropologie">
+              <option value="">—</option>
+              <option>00</option><option>0</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option>14</option><option>16</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Free People</span>
+            <select class="bsg-select" name="sz_freepeople">
+              <option value="">—</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Zara</span>
+            <select class="bsg-select" name="sz_zara">
+              <option value="">—</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">H&amp;M</span>
+            <select class="bsg-select" name="sz_hm">
+              <option value="">—</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Old Navy</span>
+            <select class="bsg-select" name="sz_oldnavy">
+              <option value="">—</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+              <option>1X</option><option>2X</option><option>3X</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">LOFT</span>
+            <select class="bsg-select" name="sz_loft">
+              <option value="">—</option>
+              <option>00</option><option>0</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option>14</option><option>16</option><option>18</option><option>20</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">J.Crew</span>
+            <select class="bsg-select" name="sz_jcrew">
+              <option value="">—</option>
+              <option>000</option><option>00</option><option>0</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option>14</option><option>16</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Target / UT</span>
+            <select class="bsg-select" name="sz_target">
+              <option value="">—</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+              <option>1X</option><option>2X</option><option>3X</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Banana Rep.</span>
+            <select class="bsg-select" name="sz_banana">
+              <option value="">—</option>
+              <option>00</option><option>0</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option>14</option><option>16</option>
+            </select>
+          </div>
+        </div>
 
+        <!-- Jeans + Shoe -->
+        <div class="measure-group-label" style="margin-top:1.5rem;">Jeans &amp; shoes</div>
         <div class="form-row">
-          <div class="form-group">
-            <label>Brand</label>
-            <select id="f-brand1" name="brand1" onchange="updateSizes('f-size1', this.value)">
-              <option value="">Select a brand</option>
-              <option>Anthropologie</option><option>Banana Republic</option>
-              <option>Free People</option><option>Gap</option>
-              <option>H&amp;M</option><option>J.Crew</option>
-              <option>LOFT</option><option>Madewell</option>
-              <option>Nordstrom</option><option>Old Navy</option>
-              <option>Revolve</option><option>Target / Universal Thread</option>
-              <option>Walmart</option><option>Zara</option>
-              <option>Amazon</option><option>ASOS</option>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Jeans waist size</label>
+            <select name="jeans_size" id="f-jeans">
+              <option value="">Select</option>
+              <option value="23">23"</option><option value="24">24"</option><option value="25">25"</option>
+              <option value="26">26"</option><option value="27">27"</option><option value="28">28"</option>
+              <option value="29">29"</option><option value="30">30"</option><option value="31">31"</option>
+              <option value="32">32"</option><option value="33">33"</option><option value="34">34"</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Your size there</label>
-            <select id="f-size1" name="size1" disabled>
-              <option value="">← Pick a brand first</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Second brand <span style="font-weight:400;color:var(--gray)">(optional)</span></label>
-            <select id="f-brand2" name="brand2" onchange="updateSizes('f-size2', this.value)">
-              <option value="">Select a brand</option>
-              <option>Anthropologie</option><option>Banana Republic</option>
-              <option>Free People</option><option>Gap</option>
-              <option>H&amp;M</option><option>J.Crew</option>
-              <option>LOFT</option><option>Madewell</option>
-              <option>Nordstrom</option><option>Old Navy</option>
-              <option>Revolve</option><option>Target / Universal Thread</option>
-              <option>Walmart</option><option>Zara</option>
-              <option>Amazon</option><option>ASOS</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Your size there</label>
-            <select id="f-size2" name="size2" disabled>
-              <option value="">← Pick a brand first</option>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Shoe size (US Women's)</label>
+            <select name="shoe_size" id="f-shoe">
+              <option value="">Select</option>
+              <option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option>
+              <option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option>
+              <option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option>
+              <option value="9.5">9.5</option><option value="10">10</option><option value="10.5">10.5</option>
+              <option value="11">11</option><option value="11.5">11.5</option><option value="12">12</option>
             </select>
           </div>
         </div>
 
-        <div class="measure-group-label">Jeans &amp; shoes</div>
+        <button type="submit" class="btn-submit" style="margin-top:1.5rem;">Join Thread NWA →</button>
+        <p class="form-note">Free forever. No spam, no shipping, no fees.</p>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label>Jeans brand</label>
-            <select id="f-jeans-brand" name="jeans_brand" onchange="updateJeansSizes('f-jeans', this.value)">
-              <option value="">Select a brand</option>
-              <option>Madewell</option><option>Levi's</option>
-              <option>AGOLDE</option><option>Frame</option>
-              <option>Paige</option><option>Citizens of Humanity</option>
-              <option>American Eagle</option><option>Lucky Brand</option>
-              <option>Gap</option><option>H&amp;M</option>
-              <option>Zara</option><option>Free People</option>
-              <option>Old Navy</option><option>Target / Universal Thread</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Your jeans size</label>
-            <select id="f-jeans" name="jeans_size" disabled>
-              <option value="">← Pick a brand first</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Shoe size (US Women's)</label>
-          <select name="shoe_size" id="f-shoe">
-            <option value="">Select</option>
-            <option>5</option><option>5.5</option><option>6</option>
-            <option>6.5</option><option>7</option><option>7.5</option>
-            <option>8</option><option>8.5</option><option>9</option>
-            <option>9.5</option><option>10</option><option>10.5</option>
-            <option>11</option><option>11.5</option><option>12</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn-submit">Create my profile →</button>
-        <p class="form-note">Free forever. No shipping, no fees, no catch — just women in NWA swapping clothes that fit.</p>
       </form>
 
       <div class="success-msg" id="success-msg">
         <div class="checkmark">💚</div>
-        <h3>Profile created!</h3>
-        <p>You're in. We'll reach out as soon as Thread NWA is live so you can start browsing closets near you.</p>
+        <h3>You're in!</h3>
+        <p>We'll reach out as soon as Thread NWA is live. In the meantime, see what browsing looks like:</p>
+        <a href="browse.html" style="display:inline-block;margin-top:1rem;background:var(--sage);color:white;text-decoration:none;border-radius:24px;padding:11px 26px;font-weight:700;font-size:0.9rem;">Preview the app →</a>
       </div>
     </div>
   </div>
@@ -1531,47 +2103,102 @@
 
   const SHEETS_ENDPOINT = 'YOUR_APPS_SCRIPT_URL';
 
-  // Brand → size options for tops/dresses
-  const brandSizes = {
-    'Anthropologie':           ['00','0','2','4','6','8','10','12','14','16'],
-    'Banana Republic':         ['00','0','2','4','6','8','10','12','14','16'],
-    'J.Crew':                  ['000','00','0','2','4','6','8','10','12','14','16'],
-    'LOFT':                    ['00','0','2','4','6','8','10','12','14','16','18','20'],
-    'Madewell':                ['XS','S','M','L','XL','0','2','4','6','8','10','12','14'],
-    'Free People':             ['XS','S','M','L','XL'],
-    'Gap':                     ['XS','S','M','L','XL','XXL'],
-    'H&M':                     ['XS','S','M','L','XL','XXL'],
-    'Old Navy':                ['XS','S','M','L','XL','XXL','1X','2X','3X'],
-    'Target / Universal Thread':['XS','S','M','L','XL','XXL','1X','2X','3X'],
-    'Walmart':                 ['XS','S','M','L','XL','XXL','1X','2X','3X','4X'],
-    'Zara':                    ['XS','S','M','L','XL'],
-    'Amazon':                  ['XS','S','M','L','XL','XXL','1X','2X','3X'],
-    'ASOS':                    ['4','6','8','10','12','14','16','18','20'],
-    'Nordstrom':               ['XS','S','M','L','XL','XXL'],
-    'Revolve':                 ['XS','S','M','L'],
+  // Measurement ranges shown alongside each size label
+  // Format: 'SIZE': 'bust XX–XX" · waist XX–XX"'
+  const topRanges = {
+    'XS':  'bust 32–34" · waist 24–26"',
+    'S':   'bust 34–36" · waist 26–28"',
+    'M':   'bust 36–38" · waist 28–30"',
+    'L':   'bust 39–41" · waist 31–33"',
+    'XL':  'bust 42–44" · waist 34–36"',
+    'XXL': 'bust 45–47" · waist 37–40"',
+    '1X':  'bust 45–47" · waist 37–40"',
+    '2X':  'bust 48–50" · waist 41–44"',
+    '3X':  'bust 51–53" · waist 45–48"',
+    '4X':  'bust 54–56" · waist 49–52"',
+    '000': 'bust 30–31" · waist 21–22"',
+    '00':  'bust 31–32" · waist 23–24"',
+    '0':   'bust 32–33" · waist 24–25"',
+    '2':   'bust 33–34" · waist 25–26"',
+    '4':   'bust 34–35" · waist 26–27"',
+    '6':   'bust 35–36" · waist 27–28"',
+    '8':   'bust 36–37" · waist 28–29"',
+    '10':  'bust 37–39" · waist 29–31"',
+    '12':  'bust 39–41" · waist 31–33"',
+    '14':  'bust 41–43" · waist 33–35"',
+    '16':  'bust 43–45" · waist 35–38"',
+    '18':  'bust 45–47" · waist 38–41"',
+    '20':  'bust 47–50" · waist 41–44"',
+    // ASOS UK numeric
+    '4 (UK)':  'bust 30–31" · waist 22–23"',
+    '6 (UK)':  'bust 31–32" · waist 23–24"',
+    '8 (UK)':  'bust 32–33" · waist 24–25"',
+    '10 (UK)': 'bust 33–35" · waist 25–27"',
+    '12 (UK)': 'bust 35–37" · waist 27–29"',
+    '14 (UK)': 'bust 37–39" · waist 29–31"',
+    '16 (UK)': 'bust 39–41" · waist 31–33"',
+    '18 (UK)': 'bust 41–43" · waist 33–36"',
+    '20 (UK)': 'bust 43–45" · waist 36–39"',
   };
 
-  // Brand → size options for jeans
+  // Waist ranges for jeans
+  const jeansRanges = {
+    // Numeric waist — confirms actual inch (brands vary ±1")
+    '23': '~23" waist', '24': '~24" waist', '25': '~25" waist',
+    '26': '~26" waist', '27': '~27" waist', '28': '~28" waist',
+    '29': '~29" waist', '30': '~30" waist', '31': '~31" waist',
+    '32': '~32" waist', '33': '~33" waist', '34': '~34" waist',
+    // Letter jeans sizes
+    '00': 'waist 23–24"', '0': 'waist 24–25"', '2':  'waist 25–26"',
+    '4':  'waist 26–27"', '6': 'waist 27–28"', '8':  'waist 28–30"',
+    '10': 'waist 30–31"', '12':'waist 31–33"', '14': 'waist 33–35"',
+    '16': 'waist 35–37"', '18':'waist 37–39"', '20': 'waist 39–41"',
+    // EU numeric (H&M, Zara jeans)
+    '32 EU': 'waist ~24"', '34 EU': 'waist ~25"', '36 EU': 'waist ~26"',
+    '38 EU': 'waist ~27"', '40 EU': 'waist ~29"', '42 EU': 'waist ~31"',
+    '44 EU': 'waist ~33"',
+  };
+
+  // Brand → sizes for tops/dresses
+  const brandSizes = {
+    'Anthropologie':            ['00','0','2','4','6','8','10','12','14','16'],
+    'Banana Republic':          ['00','0','2','4','6','8','10','12','14','16'],
+    'J.Crew':                   ['000','00','0','2','4','6','8','10','12','14','16'],
+    'LOFT':                     ['00','0','2','4','6','8','10','12','14','16','18','20'],
+    'Madewell':                 ['XS','S','M','L','XL','0','2','4','6','8','10','12','14'],
+    'Free People':              ['XS','S','M','L','XL'],
+    'Gap':                      ['XS','S','M','L','XL','XXL'],
+    'H&M':                      ['XS','S','M','L','XL','XXL'],
+    'Old Navy':                 ['XS','S','M','L','XL','XXL','1X','2X','3X'],
+    'Target / Universal Thread':['XS','S','M','L','XL','XXL','1X','2X','3X'],
+    'Walmart':                  ['XS','S','M','L','XL','XXL','1X','2X','3X','4X'],
+    'Zara':                     ['XS','S','M','L','XL'],
+    'Amazon':                   ['XS','S','M','L','XL','XXL','1X','2X','3X'],
+    'ASOS':                     ['4 (UK)','6 (UK)','8 (UK)','10 (UK)','12 (UK)','14 (UK)','16 (UK)','18 (UK)','20 (UK)'],
+    'Nordstrom':                ['XS','S','M','L','XL','XXL'],
+    'Revolve':                  ['XS','S','M','L'],
+  };
+
+  // Brand → sizes for jeans
   const jeansBrandSizes = {
-    'Madewell':                ['23','24','25','26','27','28','29','30','31','32','33','34'],
-    "Levi's":                  ['24','25','26','27','28','29','30','31','32','33','34'],
-    'AGOLDE':                  ['23','24','25','26','27','28','29','30','31','32'],
-    'Frame':                   ['23','24','25','26','27','28','29','30','31','32'],
-    'Paige':                   ['23','24','25','26','27','28','29','30','31','32'],
-    'Citizens of Humanity':    ['23','24','25','26','27','28','29','30','31','32'],
-    'American Eagle':          ['00','0','2','4','6','8','10','12','14','16','18','20'],
-    'Lucky Brand':             ['00','0','2','4','6','8','10','12','14','16'],
-    'Gap':                     ['24','25','26','27','28','29','30','31','32','33','34'],
-    'H&M':                     ['32','34','36','38','40','42','44'],
-    'Zara':                    ['32','34','36','38','40','42'],
-    'Free People':             ['24','25','26','27','28','29','30','31','32'],
-    'Old Navy':                ['0','2','4','6','8','10','12','14','16','18','20'],
+    'Madewell':                 ['23','24','25','26','27','28','29','30','31','32','33','34'],
+    "Levi's":                   ['24','25','26','27','28','29','30','31','32','33','34'],
+    'AGOLDE':                   ['23','24','25','26','27','28','29','30','31','32'],
+    'Frame':                    ['23','24','25','26','27','28','29','30','31','32'],
+    'Paige':                    ['23','24','25','26','27','28','29','30','31','32'],
+    'Citizens of Humanity':     ['23','24','25','26','27','28','29','30','31','32'],
+    'American Eagle':           ['00','0','2','4','6','8','10','12','14','16','18','20'],
+    'Lucky Brand':              ['00','0','2','4','6','8','10','12','14','16'],
+    'Gap':                      ['24','25','26','27','28','29','30','31','32','33','34'],
+    'H&M':                      ['32 EU','34 EU','36 EU','38 EU','40 EU','42 EU','44 EU'],
+    'Zara':                     ['32 EU','34 EU','36 EU','38 EU','40 EU','42 EU'],
+    'Free People':              ['24','25','26','27','28','29','30','31','32'],
+    'Old Navy':                 ['0','2','4','6','8','10','12','14','16','18','20'],
     'Target / Universal Thread':['0','2','4','6','8','10','12','14','16'],
   };
 
   function updateSizes(sizeId, brand) {
     const el = document.getElementById(sizeId);
-    el.innerHTML = '';
     if (!brand) {
       el.innerHTML = '<option value="">← Pick a brand first</option>';
       el.disabled = true;
@@ -1579,13 +2206,15 @@
     }
     const sizes = brandSizes[brand] || ['XS','S','M','L','XL','XXL','0','2','4','6','8','10','12','14','16'];
     el.innerHTML = '<option value="">Select your size</option>' +
-      sizes.map(s => `<option>${s}</option>`).join('');
+      sizes.map(s => {
+        const range = topRanges[s] ? ` · ${topRanges[s]}` : '';
+        return `<option value="${s}">${s}${range}</option>`;
+      }).join('');
     el.disabled = false;
   }
 
   function updateJeansSizes(sizeId, brand) {
     const el = document.getElementById(sizeId);
-    el.innerHTML = '';
     if (!brand) {
       el.innerHTML = '<option value="">← Pick a brand first</option>';
       el.disabled = true;
@@ -1593,7 +2222,10 @@
     }
     const sizes = jeansBrandSizes[brand] || ['24','25','26','27','28','29','30','31','32','33','34'];
     el.innerHTML = '<option value="">Select your size</option>' +
-      sizes.map(s => `<option>${s}</option>`).join('');
+      sizes.map(s => {
+        const range = jeansRanges[s] ? ` · ${jeansRanges[s]}` : '';
+        return `<option value="${s}">${s}${range}</option>`;
+      }).join('');
     el.disabled = false;
   }
 
@@ -1602,42 +2234,73 @@
 
     const name  = document.getElementById('f-name').value.trim();
     const email = document.getElementById('f-email').value.trim();
-    if (!name)  { alert('Please enter your name.'); return; }
+    if (!name)  { alert('Please enter your first name.'); return; }
     if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
 
     const btn = this.querySelector('.btn-submit');
     btn.textContent = 'Joining...';
     btn.disabled = true;
 
+    // Collect brand size grid values
+    const brandSizeFields = ['sz_madewell','sz_anthropologie','sz_freepeople','sz_zara',
+      'sz_hm','sz_oldnavy','sz_loft','sz_jcrew','sz_target','sz_banana'];
+    const sizes = {};
+    brandSizeFields.forEach(f => {
+      const el = this.querySelector(`[name="${f}"]`);
+      if (el && el.value) sizes[f] = el.value;
+    });
+
     const payload = {
       name,
       email,
-      city:        document.getElementById('f-city').value,
-      brand1:      document.getElementById('f-brand1').value,
-      size1:       document.getElementById('f-size1').value,
-      brand2:      document.getElementById('f-brand2').value,
-      size2:       document.getElementById('f-size2').value,
-      jeans_brand: document.getElementById('f-jeans-brand').value,
-      jeans_size:  document.getElementById('f-jeans').value,
-      shoe_size:   document.getElementById('f-shoe').value,
+      city:       document.getElementById('f-city').value,
+      jeans_size: document.getElementById('f-jeans').value,
+      shoe_size:  document.getElementById('f-shoe').value,
+      ...sizes,
     };
 
     try {
-      // mode:'no-cors' is required for Apps Script — response is opaque
-      // but the row is written to the sheet successfully regardless
       await fetch(SHEETS_ENDPOINT, {
         method: 'POST',
         mode:   'no-cors',
         headers: { 'Content-Type': 'text/plain' },
         body:   JSON.stringify(payload),
       });
-    } catch (_) {
-      // network errors are rare; show success so the user isn't blocked
-    }
+    } catch (_) {}
 
     this.style.display = 'none';
     document.getElementById('success-msg').style.display = 'block';
   });
+
+  // ── PHOTO DROP ZONE ──────────────────────────────────────────────────────────
+  (function () {
+    const drop    = document.getElementById('photo-drop');
+    const input   = document.getElementById('photo-input');
+    const preview = document.getElementById('photo-preview');
+    const inner   = document.getElementById('photo-drop-inner');
+    if (!drop) return;
+
+    function showPreview(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        inner.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    drop.addEventListener('click', () => input.click());
+    input.addEventListener('change', () => showPreview(input.files[0]));
+    drop.addEventListener('dragover',  e => { e.preventDefault(); drop.classList.add('dragging'); });
+    drop.addEventListener('dragleave', () => drop.classList.remove('dragging'));
+    drop.addEventListener('drop', e => {
+      e.preventDefault();
+      drop.classList.remove('dragging');
+      showPreview(e.dataTransfer.files[0]);
+    });
+  })();
 
   // Smooth scroll for all anchor links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -1646,7 +2309,73 @@
       document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
     });
   });
+  // ── MULTI-STEP FORM ──────────────────────────────────────────────────────────
+  function goToStep2() {
+    const name  = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    if (!name)  { alert('Please enter your name.'); return; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+
+    document.getElementById('form-step1').classList.remove('active');
+    document.getElementById('form-step2').classList.add('active');
+    document.getElementById('dot1').classList.remove('active');
+    document.getElementById('dot2').classList.add('active');
+
+    // Scroll signup form into view smoothly
+    document.getElementById('signup').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function skipStep2() {
+    // Submit just step 1 data, no sizes
+    const name  = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const payload = {
+      name,
+      email,
+      city:        document.getElementById('f-city').value,
+      brand1: '', size1: '', brand2: '', size2: '',
+      jeans_brand: '', jeans_size: '', shoe_size: '',
+    };
+    fetch(SHEETS_ENDPOINT, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload),
+    }).catch(() => {});
+    document.getElementById('waitlist-form').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+
+  // ── STICKY MOBILE CTA (IntersectionObserver) ─────────────────────────────────
+  (function () {
+    const hero = document.querySelector('section');          // first section = hero
+    const bar  = document.getElementById('sticky-cta-bar');
+    if (!hero || !bar) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          bar.classList.add('visible');
+        } else {
+          bar.classList.remove('visible');
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(hero);
+
+    document.getElementById('sticky-cta-close').addEventListener('click', () => {
+      bar.classList.remove('visible');
+      observer.disconnect();           // don't re-show after dismiss
+    });
+  })();
 </script>
+
+<!-- STICKY MOBILE CTA BAR -->
+<div class="sticky-cta" id="sticky-cta-bar">
+  <span class="sticky-cta-text">Join free — NWA women's clothing swap</span>
+  <a href="#signup" class="sticky-cta-btn">Sign up →</a>
+  <button class="sticky-cta-close" id="sticky-cta-close" aria-label="Dismiss">✕</button>
+</div>
 
 </body>
 </html>
