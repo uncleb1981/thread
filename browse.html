@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Thread NWA — Browse</title>
+  <title>ThreadLoop NWA — Browse</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -215,6 +215,30 @@
     .pill.shared {
       background: rgba(74,124,89,0.7);
       border-color: rgba(74,124,89,1);
+    }
+
+    .card-brands-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.65;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .card-items-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: rgba(74,124,89,0.75);
+      backdrop-filter: blur(6px);
+      border-radius: 20px;
+      padding: 3px 9px;
+      margin-top: 5px;
+      color: white;
     }
 
     .card-note {
@@ -623,9 +647,10 @@
   <div class="hint-panel">
     <h3>Try it out</h3>
     <ul>
-      <li>Tap <strong>♥</strong> to heart a closet</li>
-      <li>Tap <strong>✕</strong> to pass</li>
-      <li>Heart <strong>Jordan</strong> to see a match</li>
+      <li>Each card = <strong>one closet</strong> near you</li>
+      <li>Tap <strong>♥</strong> if the closet fits your style &amp; size</li>
+      <li>Tap <strong>✕</strong> to pass on this closet</li>
+      <li>Heart <strong>Jordan's Closet</strong> to see a match</li>
       <li>See the chat &amp; Messenger link</li>
       <li>Use ← → arrow keys too</li>
     </ul>
@@ -637,7 +662,7 @@
 
     <!-- Top bar -->
     <div class="top-bar">
-      <div class="logo">Thread<span>NWA</span></div>
+      <div class="logo">ThreadLoop<span>NWA</span></div>
       <div class="top-right">
         <div class="icon-btn" onclick="showScreen('inbox')" title="Matches">
           💬
@@ -654,8 +679,8 @@
         <div class="card-area" id="card-area">
           <div class="empty-state" id="empty-state">
             <div class="empty-icon">🌿</div>
-            <div class="empty-h">You've seen everyone nearby</div>
-            <p class="empty-p">New closets are added every day in NWA.<br>Check back soon — or see your matches!</p>
+            <div class="empty-h">You've browsed every closet nearby</div>
+            <p class="empty-p">New closets are added every day in NWA.<br>Check back soon — or connect with your current matches!</p>
             <button class="btn-see-matches" onclick="showScreen('inbox')">See my matches →</button>
           </div>
         </div>
@@ -668,8 +693,8 @@
       <!-- ── MATCH ── -->
       <div class="screen screen-match" id="screen-match">
         <div class="match-burst">✨</div>
-        <div class="match-h">It's a Match!</div>
-        <p class="match-p" id="match-p">You and Jordan both want to swap!</p>
+        <div class="match-h">Closet Match!</div>
+        <p class="match-p" id="match-p">You and Jordan's closet are a fit — reach out to set up a swap!</p>
         <div class="match-avatars">
           <img class="match-av match-av-me"
                src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop&auto=format"
@@ -697,7 +722,7 @@
             <div class="chat-header-name" id="chat-name">Jordan</div>
             <div class="chat-header-sub" id="chat-sub">Matched today · Rogers</div>
           </div>
-          <button class="btn-msngr-hdr" onclick="window.open('https://m.me','_blank')">Messenger →</button>
+          <button class="btn-msngr-hdr" onclick="window.open('https://m.me/ben.buse','_blank')">Messenger →</button>
         </div>
 
         <div class="msgs">
@@ -712,7 +737,7 @@
         <div class="chat-cta-bar">
           <div class="msngr-cta-box">
             <div class="msngr-cta-text">Your full chat lives in <strong>Facebook Messenger</strong> — no phone number needed.</div>
-            <button class="btn-msngr-cta" onclick="window.open('https://m.me','_blank')">Open →</button>
+            <button class="btn-msngr-cta" onclick="window.open('https://m.me/ben.buse','_blank')">Open →</button>
           </div>
         </div>
       </div>
@@ -726,7 +751,7 @@
           <div class="new-matches-label">New matches</div>
           <div class="match-bubbles" id="match-bubbles">
             <div class="inbox-empty" style="padding:0;font-size:0.75rem;color:var(--gray);align-items:flex-start;text-align:left;" id="no-matches-yet">
-              Heart a closet to get your first match!
+              Heart a closet that fits your style &amp; size to get your first match!
             </div>
           </div>
         </div>
@@ -760,33 +785,37 @@
 
   const profiles = [
     {
-      id: 1, name: 'Ashley', age: 29, city: 'Bentonville',
+      id: 1, name: 'Ashley', city: 'Bentonville',
+      itemCount: 8,
       brands: ['Madewell', 'Free People', 'Anthropologie'],
-      note: 'Size 6 · Workwear &amp; weekend pieces in great condition',
+      note: 'Sizes 6 / M — workwear &amp; weekend pieces, great condition',
       photo:  'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=420&h=640&fit=crop&auto=format',
       avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop&auto=format',
       isMatch: false
     },
     {
-      id: 2, name: 'Jordan', age: 31, city: 'Rogers',
+      id: 2, name: 'Jordan', city: 'Rogers',
+      itemCount: 14,
       brands: ['Madewell', 'Zara', 'H&M'],
-      note: 'Size S/4 · Casual + boho · lots of Madewell',
+      note: 'Sizes S / 4 — casual + boho, lots of Madewell &amp; Zara',
       photo:  'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=420&h=640&fit=crop&auto=format',
       avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&auto=format',
       isMatch: true   // ← hearting Jordan triggers a match
     },
     {
-      id: 3, name: 'Emma', age: 26, city: 'Fayetteville',
+      id: 3, name: 'Emma', city: 'Fayetteville',
+      itemCount: 6,
       brands: ['LOFT', 'J.Crew', 'Banana Republic'],
-      note: 'Size M · Classic &amp; preppy vibes',
+      note: 'Sizes M / 8 — classic &amp; preppy, like-new condition',
       photo:  'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=420&h=640&fit=crop&auto=format',
       avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&auto=format',
       isMatch: false
     },
     {
-      id: 4, name: 'Priya', age: 33, city: 'Springdale',
+      id: 4, name: 'Priya', city: 'Springdale',
+      itemCount: 11,
       brands: ['Anthropologie', 'Zara', 'Free People'],
-      note: 'Size 8 · Boho &amp; vintage-inspired',
+      note: 'Sizes 8 / L — boho &amp; vintage-inspired pieces',
       photo:  'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=420&h=640&fit=crop&auto=format',
       avatar: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&h=200&fit=crop&auto=format',
       isMatch: false
@@ -811,8 +840,10 @@
     card.innerHTML = `
       <img src="${profile.photo}" alt="${profile.name}'s closet" />
       <div class="card-overlay">
-        <div class="card-name">${profile.name}, ${profile.age}</div>
+        <div class="card-name">${profile.name}'s Closet</div>
         <div class="card-location">📍 ${profile.city}</div>
+        <div class="card-items-badge">🧥 ${profile.itemCount} items available</div>
+        <div class="card-brands-label">Brands in this closet</div>
         <div class="card-brands">${pills}</div>
         <div class="card-note">${profile.note}</div>
       </div>
@@ -900,7 +931,7 @@
 
   // ── Match overlay ────────────────────────────────────────
   function showMatch(profile) {
-    document.getElementById('match-p').textContent      = `You and ${profile.name} both want to swap!`;
+    document.getElementById('match-p').textContent      = `You and ${profile.name}'s closet are a fit — reach out to set up a swap!`;
     document.getElementById('match-av-them').src        = profile.avatar;
     document.getElementById('chat-av').src              = profile.avatar;
     document.getElementById('chat-name').textContent    = profile.name;
