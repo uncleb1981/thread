@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thread NWA — Swap Clothes, Not Cash</title>
+  <title>ThreadLoop NWA — Swap Clothes, Not Cash</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1394,12 +1394,12 @@
 
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar">
-  🌱 Thread NWA is brand new — we're still working out the kinks. Found a bug or have feedback? <a href="mailto:hello@threadnwa.com">Tell us →</a>
+  🌱 ThreadLoop NWA is brand new — we're still working out the kinks. Found a bug or have feedback? <a href="mailto:hello@threadloopnwa.com">Tell us →</a>
 </div>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Thread<span>NWA</span></div>
+  <div class="nav-logo">ThreadLoop<span>NWA</span></div>
   <div class="nav-links">
     <a href="#how" class="nav-hide">How it works</a>
     <a href="#sizing" class="nav-hide">Sizing</a>
@@ -1431,7 +1431,7 @@
         <div class="sp-text"><strong>47 women</strong> already signed up in NWA — join them</div>
       </div>
 
-      <p>Thread NWA connects women in NWA to exchange clothing they love but no longer wear — matched to your exact size across every brand, for free.</p>
+      <p>ThreadLoop NWA connects women in NWA to exchange clothing they love but no longer wear — matched by one closet photo and your exact size across every brand, for free.</p>
 
       <!-- Testimonial -->
       <blockquote class="hero-quote">
@@ -1457,7 +1457,7 @@
             </div>
             <!-- App header -->
             <div class="screen-header">
-              <div class="screen-logo">ThreadNWA</div>
+              <div class="screen-logo">ThreadLoopNWA</div>
               <div class="size-badge-screen">Size 8 · Med</div>
             </div>
             <!-- Card stack -->
@@ -1469,7 +1469,7 @@
                 </div>
                 <div class="card-info">
                   <div class="card-name">Megan's Closet</div>
-                  <div class="card-sizes">Bust 36 · Waist 28 · Hip 38</div>
+                  <div class="card-sizes">Anthropologie 10 · H&amp;M L</div>
                   <div class="card-items">12 items available</div>
                 </div>
               </div>
@@ -1480,7 +1480,7 @@
                 </div>
                 <div class="card-info">
                   <div class="card-name">Ashley's Closet</div>
-                  <div class="card-sizes">Bust 34 · Waist 26 · Hip 36</div>
+                  <div class="card-sizes">Madewell 8 · Free People M</div>
                   <div class="card-items">8 items available</div>
                 </div>
               </div>
@@ -1508,14 +1508,14 @@
       <div class="step">
         <div class="step-connector"></div>
         <div class="step-number">1</div>
-        <h3>Set your sizes</h3>
-        <p>Tell us your size in the brands you actually wear — Madewell, Zara, Free People, and more. No measuring tape needed.</p>
+        <h3>Upload one closet photo + your sizes</h3>
+        <p>Take one photo that shows the pieces you'd love to trade and your overall style. Add your size in the brands you wear. That photo + sizing is what gets you great matches.</p>
       </div>
       <div class="step">
         <div class="step-connector"></div>
         <div class="step-number">2</div>
-        <h3>Browse & heart</h3>
-        <p>Swipe through closet photos from women near you in NWA. Heart closets you like, skip the rest. When it's mutual, it's a match.</p>
+        <h3>Browse & heart closets</h3>
+        <p>See one closet photo per person — enough to know if their style and pieces feel right for you. Heart the ones you love, skip the rest. When it's mutual, it's a match.</p>
       </div>
       <div class="step">
         <div class="step-connector"></div>
@@ -1610,7 +1610,7 @@
             <span class="size-val" style="font-size:0.7rem; color:var(--gray)">Vanity sized, generous</span>
           </div>
           <div class="size-match-note">
-            ✓ Her measurements stay constant — only the brand labels change
+            ✓ Her body stays the same — brand sizing is what varies. We match on what you actually buy.
           </div>
         </div>
       </div>
@@ -1633,7 +1633,7 @@
         </div>
         <div class="example-info">
           <div class="example-name">Ashley · Bentonville</div>
-          <div class="example-size">Bust 36" · Waist 28" · Hips 38" · Shoe 8.5</div>
+          <div class="example-size">Madewell 8 · Free People M</div>
           <div class="example-tags">
             <span class="ex-tag">Workwear</span>
             <span class="ex-tag">Casual</span>
@@ -1652,7 +1652,7 @@
         </div>
         <div class="example-info">
           <div class="example-name">Megan · Fayetteville</div>
-          <div class="example-size">Bust 38" · Waist 30" · Hips 40" · Shoe 9</div>
+          <div class="example-size">Anthropologie 10 · H&amp;M L</div>
           <div class="example-tags">
             <span class="ex-tag">Boho</span>
             <span class="ex-tag">Accessories</span>
@@ -1671,11 +1671,144 @@
         </div>
         <div class="example-info">
           <div class="example-name">Sarah · Rogers</div>
-          <div class="example-size">Bust 34" · Waist 26" · Hips 36" · Shoe 7.5</div>
+          <div class="example-size">Zara M · Madewell 6</div>
           <div class="example-tags">
             <span class="ex-tag">Date night</span>
             <span class="ex-tag">Seasonal</span>
             <span class="ex-tag">11 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="ex-photo">
+          <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&h=220&fit=crop&auto=format" alt="Jordan's closet" />
+        </div>
+        <div class="example-info">
+          <div class="example-name">Jordan · Bentonville</div>
+          <div class="example-size">Free People S · Madewell 4</div>
+          <div class="example-tags">
+            <span class="ex-tag">Casual</span>
+            <span class="ex-tag">Boho</span>
+            <span class="ex-tag">7 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="ex-photo">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=220&fit=crop&auto=format" alt="Emma's closet" />
+        </div>
+        <div class="example-info">
+          <div class="example-name">Emma · Springdale</div>
+          <div class="example-size">LOFT 8 · J.Crew 6</div>
+          <div class="example-tags">
+            <span class="ex-tag">Classic</span>
+            <span class="ex-tag">Preppy</span>
+            <span class="ex-tag">6 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="ex-photo">
+          <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&h=220&fit=crop&auto=format" alt="Taylor's closet" />
+        </div>
+        <div class="example-info">
+          <div class="example-name">Taylor · Fayetteville</div>
+          <div class="example-size">Old Navy M · Target S/M</div>
+          <div class="example-tags">
+            <span class="ex-tag">Everyday</span>
+            <span class="ex-tag">Basics</span>
+            <span class="ex-tag">13 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="ex-photo">
+          <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&h=220&fit=crop&auto=format" alt="Priya's closet" />
+        </div>
+        <div class="example-info">
+          <div class="example-name">Priya · Rogers</div>
+          <div class="example-size">Anthropologie 8 · Zara S</div>
+          <div class="example-tags">
+            <span class="ex-tag">Eclectic</span>
+            <span class="ex-tag">Colorful</span>
+            <span class="ex-tag">8 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="ex-photo">
+          <img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=400&h=220&fit=crop&auto=format" alt="Lauren's closet" />
+        </div>
+        <div class="example-info">
+          <div class="example-name">Lauren · Bentonville</div>
+          <div class="example-size">Banana Republic 6 · Madewell 8</div>
+          <div class="example-tags">
+            <span class="ex-tag">Professional</span>
+            <span class="ex-tag">Polished</span>
+            <span class="ex-tag">10 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="ex-photo">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=220&fit=crop&auto=format" alt="Madison's closet" />
+        </div>
+        <div class="example-info">
+          <div class="example-name">Madison · Fayetteville</div>
+          <div class="example-size">H&amp;M S · Free People XS</div>
+          <div class="example-tags">
+            <span class="ex-tag">Trendy</span>
+            <span class="ex-tag">Going out</span>
+            <span class="ex-tag">5 items</span>
+          </div>
+        </div>
+        <div class="example-actions">
+          <button class="ex-action" onclick="this.textContent='✕'">✕</button>
+          <button class="ex-action love" onclick="this.textContent='💚'">♥</button>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="ex-photo">
+          <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=220&fit=crop&auto=format" alt="Chloe's closet" />
+        </div>
+        <div class="example-info">
+          <div class="example-name">Chloe · Springdale</div>
+          <div class="example-size">J.Crew 4 · LOFT 6</div>
+          <div class="example-tags">
+            <span class="ex-tag">Preppy</span>
+            <span class="ex-tag">Casual</span>
+            <span class="ex-tag">12 items</span>
           </div>
         </div>
         <div class="example-actions">
@@ -1846,7 +1979,7 @@
   <div class="section-inner">
     <div class="section-tag">Your safety</div>
     <h2 class="section-title">Feel safe the whole time.</h2>
-    <p class="section-sub">Thread NWA is built around consent and control. You decide who sees you, when you chat, and where you meet.</p>
+    <p class="section-sub">ThreadLoop NWA is built around consent and control. You decide who sees you, when you chat, and where you meet.</p>
 
     <div class="safety-grid">
       <div class="safety-card">
@@ -1905,8 +2038,8 @@
 <section id="signup" class="signup-section">
   <div class="section-inner">
     <div class="section-tag">Create your profile</div>
-    <h2 class="section-title">Join Thread NWA.</h2>
-    <p class="section-sub">Upload a photo of your closet showing the pieces you want to trade, pick your sizes by brand, and we'll find your best matches in NWA.</p>
+    <h2 class="section-title">Join ThreadLoop NWA.</h2>
+    <p class="section-sub">Upload <strong>one photo</strong> of your closet — show the pieces you'd love to trade and your overall style. Add your sizes by brand. That's all we need to find you a great match nearby.</p>
 
     <div class="signup-form">
       <form id="waitlist-form">
@@ -1916,7 +2049,7 @@
           <input type="file" accept="image/*" id="photo-input" hidden />
           <div class="photo-drop-inner" id="photo-drop-inner">
             <div class="photo-drop-icon">🧥</div>
-            <p>Closet photo<span>pieces to trade</span></p>
+            <p>1 closet photo<span>show your style + pieces to trade</span></p>
           </div>
           <img id="photo-preview" alt="Your photo" />
         </div>
@@ -2029,6 +2162,57 @@
           </div>
         </div>
 
+        <!-- Athleisure sizes -->
+        <div class="measure-group-label" style="margin-top:1.5rem;">
+          Athleisure &amp; activewear
+          <span style="font-weight:400;color:var(--gray);text-transform:none;letter-spacing:0;font-size:0.75rem;"> — if you wear it</span>
+        </div>
+        <div class="bsg-grid">
+          <div class="bsg-row">
+            <span class="bsg-label">Lululemon</span>
+            <select class="bsg-select" name="sz_lululemon">
+              <option value="">—</option>
+              <option>0</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option>14</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Athleta</span>
+            <select class="bsg-select" name="sz_athleta">
+              <option value="">—</option>
+              <option>XXS</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+              <option>1X</option><option>2X</option><option>3X</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Nike / Dri-FIT</span>
+            <select class="bsg-select" name="sz_nike">
+              <option value="">—</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Alo Yoga</span>
+            <select class="bsg-select" name="sz_alo">
+              <option value="">—</option>
+              <option>XXS</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Vuori</span>
+            <select class="bsg-select" name="sz_vuori">
+              <option value="">—</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
+            </select>
+          </div>
+          <div class="bsg-row">
+            <span class="bsg-label">Under Armour</span>
+            <select class="bsg-select" name="sz_underarmour">
+              <option value="">—</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+            </select>
+          </div>
+        </div>
+
         <!-- Jeans + Shoe -->
         <div class="measure-group-label" style="margin-top:1.5rem;">Jeans &amp; shoes</div>
         <div class="form-row">
@@ -2055,7 +2239,7 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-submit" style="margin-top:1.5rem;">Join Thread NWA →</button>
+        <button type="submit" class="btn-submit" style="margin-top:1.5rem;">Join ThreadLoop NWA →</button>
         <p class="form-note">Free forever. No spam, no shipping, no fees.</p>
 
       </form>
@@ -2063,7 +2247,7 @@
       <div class="success-msg" id="success-msg">
         <div class="checkmark">💚</div>
         <h3>You're in!</h3>
-        <p>We'll reach out as soon as Thread NWA is live. In the meantime, see what browsing looks like:</p>
+        <p>We'll reach out as soon as ThreadLoop NWA is live. In the meantime, see what browsing closets looks like:</p>
         <a href="browse.html" style="display:inline-block;margin-top:1rem;background:var(--sage);color:white;text-decoration:none;border-radius:24px;padding:11px 26px;font-weight:700;font-size:0.9rem;">Preview the app →</a>
       </div>
     </div>
@@ -2072,8 +2256,8 @@
 
 <!-- FOOTER -->
 <footer>
-  <p><strong>Thread NWA</strong> · Free clothing exchange for women in Northwest Arkansas</p>
-  <p style="margin-top: 0.5rem;">Coming soon to iOS · <a href="mailto:hello@threadnwa.com" style="color: inherit;">hello@threadnwa.com</a></p>
+  <p><strong>ThreadLoop NWA</strong> · Free clothing exchange for women in Northwest Arkansas</p>
+  <p style="margin-top: 0.5rem;">Coming soon to iOS · <a href="mailto:hello@threadloopnwa.com" style="color: inherit;">hello@threadloopnwa.com</a></p>
 </footer>
 
 <script>
