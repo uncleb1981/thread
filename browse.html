@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Thread NWA — Browse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:        #4A7C59;
+      --sage-dark:   #3A6347;
+      --blush:       #E8B4A0;
+      --blush-light: #FDF0EB;
+      --cream:       #FAF7F2;
+      --charcoal:    #1A1A1A;
+      --gray:        #888;
+      --border:      #E5E0D8;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      color: var(--charcoal);
+      background: #1C2820;
+    }
+
+    /* ── Desktop wrapper ── */
+    .desktop-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 24px;
+      background: linear-gradient(140deg, #1C2820 0%, #0F1912 100%);
+    }
+
+    /* ── Phone shell ── */
+    .app-shell {
+      width: 390px;
+      height: 844px;
+      max-height: 96vh;
+      background: var(--cream);
+      border-radius: 44px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    /* Hint panel beside phone on desktop */
+    .hint-panel {
+      width: 220px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      flex-shrink: 0;
+    }
+    .hint-panel h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: white;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .hint-panel ul { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+    .hint-panel a {
+      display: inline-block;
+      margin-top: 20px;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.75rem;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .hint-panel a:hover { background: rgba(255,255,255,0.06); }
+
+    @media (max-width: 680px) {
+      .desktop-wrap { padding: 0; background: var(--cream); }
+      .app-shell { width: 100%; height: 100vh; max-height: none; border-radius: 0; box-shadow: none; }
+      .hint-panel { display: none; }
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      flex-shrink: 0;
+      height: 58px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      z-index: 20;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .logo span { color: var(--sage); }
+
+    .top-right { display: flex; gap: 8px; align-items: center; }
+
+    .icon-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1rem;
+      position: relative; user-select: none;
+    }
+
+    .badge {
+      position: absolute; top: -4px; right: -4px;
+      min-width: 16px; height: 16px;
+      background: #E05A5A;
+      border-radius: 9px;
+      font-size: 0.55rem; font-weight: 700;
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid var(--cream);
+      padding: 0 3px;
+    }
+
+    /* ── Screens ── */
+    .screens {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screen {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .screen.active { opacity: 1; pointer-events: all; }
+
+    /* ══════════════════════════════
+       BROWSE
+    ══════════════════════════════ */
+    .screen-browse { background: var(--cream); }
+
+    .card-area {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Card stack */
+    .card {
+      position: absolute;
+      top: 10px; left: 10px; right: 10px; bottom: 0;
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.3s;
+      cursor: grab;
+      touch-action: pan-y;
+    }
+    .card:active { cursor: grabbing; }
+
+    .card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .card-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 80px 18px 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 55%, transparent 100%);
+      color: white;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .card-location {
+      font-size: 0.78rem;
+      opacity: 0.82;
+      margin-top: 3px;
+    }
+
+    .card-brands {
+      display: flex; flex-wrap: wrap; gap: 5px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      font-size: 0.63rem; font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(6px);
+      color: white;
+    }
+    .pill.shared {
+      background: rgba(74,124,89,0.7);
+      border-color: rgba(74,124,89,1);
+    }
+
+    .card-note {
+      margin-top: 7px;
+      font-size: 0.73rem;
+      opacity: 0.78;
+    }
+
+    /* Stamp */
+    .stamp {
+      position: absolute;
+      top: 26px;
+      font-size: 1.5rem;
+      font-weight: 900;
+      padding: 5px 14px;
+      border-radius: 8px;
+      border: 3px solid;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      transition: opacity 0.12s;
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+    .stamp-swap {
+      right: 20px; color: var(--sage); border-color: var(--sage);
+      transform: rotate(12deg);
+    }
+    .stamp-pass {
+      left: 20px; color: #D94F4F; border-color: #D94F4F;
+      transform: rotate(-12deg);
+    }
+
+    /* Exit animations */
+    .card.exit-right {
+      transition: transform 0.36s ease, opacity 0.36s ease !important;
+      transform: translateX(160%) rotate(22deg) !important;
+      opacity: 0;
+    }
+    .card.exit-left {
+      transition: transform 0.36s ease, opacity 0.36s ease !important;
+      transform: translateX(-160%) rotate(-22deg) !important;
+      opacity: 0;
+    }
+
+    /* Action bar */
+    .action-bar {
+      flex-shrink: 0;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-circle {
+      border: none; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.12s, box-shadow 0.12s;
+      font-weight: 700; user-select: none;
+    }
+    .btn-circle:active { transform: scale(0.88) !important; }
+
+    .btn-skip {
+      width: 60px; height: 60px;
+      background: white;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      color: #D94F4F;
+      font-size: 1.6rem;
+    }
+    .btn-heart {
+      width: 74px; height: 74px;
+      background: var(--sage);
+      box-shadow: 0 8px 24px rgba(74,124,89,0.45);
+      color: white;
+      font-size: 2rem;
+    }
+
+    /* Empty state */
+    .empty-state {
+      position: absolute; inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 36px;
+      background: var(--cream);
+    }
+    .empty-state.show { display: flex; }
+    .empty-icon { font-size: 3.5rem; margin-bottom: 16px; }
+    .empty-h {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .empty-p { font-size: 0.83rem; color: var(--gray); line-height: 1.65; }
+    .btn-see-matches {
+      margin-top: 22px;
+      background: var(--sage); color: white;
+      border: none; border-radius: 26px;
+      padding: 13px 30px;
+      font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+    }
+
+    /* ══════════════════════════════
+       MATCH OVERLAY
+    ══════════════════════════════ */
+    .screen-match {
+      background: rgba(12, 22, 16, 0.97);
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 36px 28px;
+      gap: 0;
+    }
+
+    .match-burst { font-size: 3.2rem; margin-bottom: 4px; }
+
+    .match-h {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem; font-weight: 700;
+      color: white; margin-bottom: 6px;
+    }
+
+    .match-p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .match-avatars {
+      position: relative;
+      width: 230px; height: 120px;
+      margin: 0 auto 36px;
+    }
+    .match-av {
+      position: absolute;
+      width: 104px; height: 104px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--sage);
+      top: 8px;
+    }
+    .match-av-me  { left: 0;   transform: rotate(-4deg); z-index: 1; }
+    .match-av-them { right: 0; transform: rotate( 4deg); z-index: 2; }
+    .match-heart-mid {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 34px; height: 34px;
+      background: var(--sage);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: white;
+      border: 3px solid rgba(12,22,16,0.97);
+      z-index: 3;
+    }
+
+    .match-ctas {
+      width: 100%;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .btn-msngr-big {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: #0084FF; color: white;
+      border: none; border-radius: 30px;
+      padding: 15px 24px;
+      font-size: 0.92rem; font-weight: 700;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      width: 100%;
+    }
+
+    .btn-browse-more {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.6);
+      border-radius: 30px;
+      padding: 13px 24px;
+      font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+    }
+
+    /* ══════════════════════════════
+       CHAT
+    ══════════════════════════════ */
+    .screen-chat { background: white; }
+
+    .chat-header {
+      flex-shrink: 0;
+      height: 62px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+
+    .btn-back {
+      background: none; border: none;
+      font-size: 1.4rem; cursor: pointer;
+      color: var(--charcoal); padding: 4px;
+      flex-shrink: 0;
+    }
+
+    .chat-av {
+      width: 36px; height: 36px;
+      border-radius: 50%; object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .chat-header-text { flex: 1; min-width: 0; }
+    .chat-header-name { font-weight: 700; font-size: 0.93rem; }
+    .chat-header-sub { font-size: 0.68rem; color: var(--sage); }
+
+    .btn-msngr-hdr {
+      background: #0084FF; color: white;
+      border: none; border-radius: 16px;
+      padding: 7px 13px;
+      font-size: 0.68rem; font-weight: 700;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    .msgs {
+      flex: 1; overflow-y: auto;
+      padding: 14px 14px 8px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .msg-time {
+      text-align: center;
+      font-size: 0.62rem; color: var(--gray);
+      margin: 4px 0;
+    }
+
+    .msg {
+      max-width: 78%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      font-size: 0.84rem;
+      line-height: 1.48;
+    }
+    .msg-them {
+      background: #F0EDE8; color: var(--charcoal);
+      border-bottom-left-radius: 5px;
+      align-self: flex-start;
+    }
+    .msg-me {
+      background: var(--sage); color: white;
+      border-bottom-right-radius: 5px;
+      align-self: flex-end;
+    }
+
+    .chat-cta-bar {
+      flex-shrink: 0;
+      padding: 12px 14px;
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+
+    .msngr-cta-box {
+      background: #EEF5FF;
+      border: 1px solid #C5D9F8;
+      border-radius: 14px;
+      padding: 11px 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .msngr-cta-text {
+      flex: 1;
+      font-size: 0.72rem;
+      color: #1A5FA8; line-height: 1.45;
+    }
+
+    .btn-msngr-cta {
+      background: #0084FF; color: white;
+      border: none; border-radius: 14px;
+      padding: 8px 13px;
+      font-size: 0.68rem; font-weight: 700;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════
+       INBOX
+    ══════════════════════════════ */
+    .screen-inbox { background: var(--cream); }
+
+    .inbox-header {
+      flex-shrink: 0;
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .inbox-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; font-weight: 700;
+    }
+
+    .new-matches {
+      flex-shrink: 0;
+      padding: 12px 20px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .new-matches-label {
+      font-size: 0.67rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--gray); margin-bottom: 10px;
+    }
+    .match-bubbles { display: flex; gap: 14px; }
+    .match-bub {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 4px; cursor: pointer;
+    }
+    .match-bub img {
+      width: 56px; height: 56px;
+      border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--sage);
+    }
+    .match-bub span { font-size: 0.63rem; font-weight: 600; color: var(--charcoal); }
+
+    .convo-list { flex: 1; overflow-y: auto; }
+
+    .convo {
+      display: flex; align-items: center; gap: 12px;
+      padding: 13px 20px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .convo:active { background: var(--cream); }
+    .convo img {
+      width: 50px; height: 50px;
+      border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    }
+    .convo-text { flex: 1; min-width: 0; }
+    .convo-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 2px; }
+    .convo-preview {
+      font-size: 0.73rem; color: var(--gray);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .convo-time { font-size: 0.63rem; color: var(--gray); flex-shrink: 0; }
+
+    .inbox-empty {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 32px;
+      color: var(--gray); font-size: 0.83rem; line-height: 1.6;
+    }
+    .inbox-empty-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+    /* ══════════════════════════════
+       BOTTOM NAV
+    ══════════════════════════════ */
+    .bottom-nav {
+      flex-shrink: 0;
+      height: 66px;
+      background: white;
+      border-top: 1px solid var(--border);
+      display: flex;
+    }
+
+    .nav-tab {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 2px; cursor: pointer;
+    }
+    .nav-tab:active { background: var(--cream); }
+    .nav-tab-icon { font-size: 1.3rem; }
+    .nav-tab-label {
+      font-size: 0.58rem; font-weight: 700;
+      color: var(--gray);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .nav-tab.active .nav-tab-label { color: var(--sage); }
+
+    /* ══════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════ */
+    @keyframes popIn {
+      from { transform: scale(0.65); opacity: 0; }
+      60%  { transform: scale(1.06); }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    .screen-match.active .match-burst  { animation: popIn 0.42s ease both; }
+    .screen-match.active .match-h      { animation: popIn 0.42s ease both 0.07s; }
+    .screen-match.active .match-p      { animation: fadeUp 0.35s ease both 0.14s; }
+    .screen-match.active .match-avatars{ animation: popIn 0.42s ease both 0.18s; }
+    .screen-match.active .match-ctas   { animation: fadeUp 0.35s ease both 0.28s; }
+  </style>
+</head>
+<body>
+<div class="desktop-wrap">
+
+  <!-- Hint panel -->
+  <div class="hint-panel">
+    <h3>Try it out</h3>
+    <ul>
+      <li>Tap <strong>♥</strong> to heart a closet</li>
+      <li>Tap <strong>✕</strong> to pass</li>
+      <li>Heart <strong>Jordan</strong> to see a match</li>
+      <li>See the chat &amp; Messenger link</li>
+      <li>Use ← → arrow keys too</li>
+    </ul>
+    <a href="index.html">← Back to landing page</a>
+  </div>
+
+  <!-- App shell -->
+  <div class="app-shell">
+
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="logo">Thread<span>NWA</span></div>
+      <div class="top-right">
+        <div class="icon-btn" onclick="showScreen('inbox')" title="Matches">
+          💬
+          <div class="badge" id="inbox-badge">1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screens -->
+    <div class="screens">
+
+      <!-- ── BROWSE ── -->
+      <div class="screen screen-browse active" id="screen-browse">
+        <div class="card-area" id="card-area">
+          <div class="empty-state" id="empty-state">
+            <div class="empty-icon">🌿</div>
+            <div class="empty-h">You've seen everyone nearby</div>
+            <p class="empty-p">New closets are added every day in NWA.<br>Check back soon — or see your matches!</p>
+            <button class="btn-see-matches" onclick="showScreen('inbox')">See my matches →</button>
+          </div>
+        </div>
+        <div class="action-bar" id="action-bar">
+          <button class="btn-circle btn-skip" id="btn-skip" title="Pass (←)">✕</button>
+          <button class="btn-circle btn-heart" id="btn-heart" title="Heart (→)">♥</button>
+        </div>
+      </div>
+
+      <!-- ── MATCH ── -->
+      <div class="screen screen-match" id="screen-match">
+        <div class="match-burst">✨</div>
+        <div class="match-h">It's a Match!</div>
+        <p class="match-p" id="match-p">You and Jordan both want to swap!</p>
+        <div class="match-avatars">
+          <img class="match-av match-av-me"
+               src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop&auto=format"
+               alt="You" />
+          <div class="match-heart-mid">♥</div>
+          <img class="match-av match-av-them" id="match-av-them" src="" alt="Match" />
+        </div>
+        <div class="match-ctas">
+          <button class="btn-msngr-big" id="btn-open-chat">
+            <svg width="18" height="18" viewBox="0 0 36 36" fill="white">
+              <path d="M18 2C9.16 2 2 8.71 2 16.98c0 4.4 1.97 8.33 5.1 11.01V34l4.64-2.55A17.1 17.1 0 0018 31.96c8.84 0 16-6.71 16-14.98C34 8.71 26.84 2 18 2z"/>
+            </svg>
+            Send a message in Messenger
+          </button>
+          <button class="btn-browse-more" id="btn-browse-more">Keep browsing</button>
+        </div>
+      </div>
+
+      <!-- ── CHAT ── -->
+      <div class="screen screen-chat" id="screen-chat">
+        <div class="chat-header">
+          <button class="btn-back" id="btn-chat-back">←</button>
+          <img class="chat-av" id="chat-av" src="" alt="" />
+          <div class="chat-header-text">
+            <div class="chat-header-name" id="chat-name">Jordan</div>
+            <div class="chat-header-sub" id="chat-sub">Matched today · Rogers</div>
+          </div>
+          <button class="btn-msngr-hdr" onclick="window.open('https://m.me','_blank')">Messenger →</button>
+        </div>
+
+        <div class="msgs">
+          <div class="msg-time">Today · Just now</div>
+          <div class="msg msg-them">Hey! Can't believe we matched 🎉 I've been eyeing those Free People pieces in your closet 👀</div>
+          <div class="msg msg-me">Same!! Your Madewell jacket is exactly what I've been looking for</div>
+          <div class="msg msg-them">Want to meet up at Brightwater in Bentonville this weekend?</div>
+          <div class="msg msg-me">Yes! Saturday around 11am?</div>
+          <div class="msg msg-them">Perfect ☀️ See you then!</div>
+        </div>
+
+        <div class="chat-cta-bar">
+          <div class="msngr-cta-box">
+            <div class="msngr-cta-text">Your full chat lives in <strong>Facebook Messenger</strong> — no phone number needed.</div>
+            <button class="btn-msngr-cta" onclick="window.open('https://m.me','_blank')">Open →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INBOX ── -->
+      <div class="screen screen-inbox" id="screen-inbox">
+        <div class="inbox-header">
+          <div class="inbox-title">Matches</div>
+        </div>
+        <div class="new-matches">
+          <div class="new-matches-label">New matches</div>
+          <div class="match-bubbles" id="match-bubbles">
+            <div class="inbox-empty" style="padding:0;font-size:0.75rem;color:var(--gray);align-items:flex-start;text-align:left;" id="no-matches-yet">
+              Heart a closet to get your first match!
+            </div>
+          </div>
+        </div>
+        <div class="convo-list" id="convo-list"></div>
+      </div>
+
+    </div><!-- /screens -->
+
+    <!-- Bottom nav -->
+    <nav class="bottom-nav">
+      <div class="nav-tab active" id="tab-browse" onclick="showScreen('browse')">
+        <div class="nav-tab-icon">🃏</div>
+        <div class="nav-tab-label">Browse</div>
+      </div>
+      <div class="nav-tab" id="tab-inbox" onclick="showScreen('inbox')">
+        <div class="nav-tab-icon">💬</div>
+        <div class="nav-tab-label">Matches</div>
+      </div>
+      <div class="nav-tab" id="tab-profile">
+        <div class="nav-tab-icon">👤</div>
+        <div class="nav-tab-label">Profile</div>
+      </div>
+    </nav>
+
+  </div><!-- /app-shell -->
+</div><!-- /desktop-wrap -->
+
+<script>
+  // Brands I listed when I signed up
+  const myBrands = ['Madewell', 'Free People', 'H&M'];
+
+  const profiles = [
+    {
+      id: 1, name: 'Ashley', age: 29, city: 'Bentonville',
+      brands: ['Madewell', 'Free People', 'Anthropologie'],
+      note: 'Size 6 · Workwear &amp; weekend pieces in great condition',
+      photo:  'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=420&h=640&fit=crop&auto=format',
+      avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop&auto=format',
+      isMatch: false
+    },
+    {
+      id: 2, name: 'Jordan', age: 31, city: 'Rogers',
+      brands: ['Madewell', 'Zara', 'H&M'],
+      note: 'Size S/4 · Casual + boho · lots of Madewell',
+      photo:  'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=420&h=640&fit=crop&auto=format',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&auto=format',
+      isMatch: true   // ← hearting Jordan triggers a match
+    },
+    {
+      id: 3, name: 'Emma', age: 26, city: 'Fayetteville',
+      brands: ['LOFT', 'J.Crew', 'Banana Republic'],
+      note: 'Size M · Classic &amp; preppy vibes',
+      photo:  'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=420&h=640&fit=crop&auto=format',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&auto=format',
+      isMatch: false
+    },
+    {
+      id: 4, name: 'Priya', age: 33, city: 'Springdale',
+      brands: ['Anthropologie', 'Zara', 'Free People'],
+      note: 'Size 8 · Boho &amp; vintage-inspired',
+      photo:  'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=420&h=640&fit=crop&auto=format',
+      avatar: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&h=200&fit=crop&auto=format',
+      isMatch: false
+    }
+  ];
+
+  let currentIdx  = 0;
+  let acting      = false;
+  let activeMatch = null;
+
+  // ── Build card DOM ───────────────────────────────────────
+  function buildCard(profile) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.id = profile.id;
+
+    const pills = profile.brands.map(b => {
+      const shared = myBrands.includes(b);
+      return `<span class="pill${shared ? ' shared' : ''}">${b}${shared ? ' ✓' : ''}</span>`;
+    }).join('');
+
+    card.innerHTML = `
+      <img src="${profile.photo}" alt="${profile.name}'s closet" />
+      <div class="card-overlay">
+        <div class="card-name">${profile.name}, ${profile.age}</div>
+        <div class="card-location">📍 ${profile.city}</div>
+        <div class="card-brands">${pills}</div>
+        <div class="card-note">${profile.note}</div>
+      </div>
+      <div class="stamp stamp-swap">SWAP</div>
+      <div class="stamp stamp-pass">PASS</div>
+    `;
+    return card;
+  }
+
+  // ── Render stack ─────────────────────────────────────────
+  function initCards() {
+    const area = document.getElementById('card-area');
+    // Insert in reverse so index 0 ends up on top
+    [...profiles].reverse().forEach(p => {
+      area.insertBefore(buildCard(p), area.firstChild);
+    });
+    stackVisuals();
+  }
+
+  function stackVisuals() {
+    const cards = visibleCards();
+    cards.forEach((c, i) => {
+      c.style.zIndex     = 10 - i;
+      c.style.transition = 'transform 0.32s cubic-bezier(0.34,1.4,0.64,1), opacity 0.32s';
+      if (i === 0) { c.style.transform = 'scale(1) translateY(0)'; c.style.opacity = '1'; }
+      else if (i === 1) { c.style.transform = 'scale(0.95) translateY(12px)'; c.style.opacity = '1'; }
+      else { c.style.transform = 'scale(0.9) translateY(22px)'; c.style.opacity = '0'; }
+      // Remove transition lock after animation
+      setTimeout(() => { c.style.transition = ''; }, 350);
+    });
+  }
+
+  function visibleCards() {
+    return [...document.querySelectorAll('#card-area .card:not(.exit-right):not(.exit-left)')];
+  }
+
+  // ── Swipe action ─────────────────────────────────────────
+  function doAction(heart) {
+    if (acting) return;
+    const cards = visibleCards();
+    if (!cards.length) return;
+
+    const front   = cards[0];
+    const profile = profiles[currentIdx];
+    if (!profile) return;
+
+    acting = true;
+
+    // Briefly flash stamp
+    front.querySelector(heart ? '.stamp-swap' : '.stamp-pass').style.opacity = '1';
+
+    setTimeout(() => {
+      front.classList.add(heart ? 'exit-right' : 'exit-left');
+
+      // Promote card behind
+      if (cards[1]) {
+        cards[1].style.transition = 'transform 0.34s cubic-bezier(0.34,1.4,0.64,1)';
+        cards[1].style.transform  = 'scale(1) translateY(0)';
+        cards[1].style.zIndex     = '10';
+        setTimeout(() => { if (cards[1]) cards[1].style.transition = ''; }, 360);
+      }
+      if (cards[2]) {
+        cards[2].style.transition = 'transform 0.34s ease';
+        cards[2].style.transform  = 'scale(0.95) translateY(12px)';
+        cards[2].style.opacity    = '1';
+        setTimeout(() => { if (cards[2]) cards[2].style.transition = ''; }, 360);
+      }
+
+      currentIdx++;
+      const isMatch = heart && profile.isMatch;
+
+      setTimeout(() => {
+        front.remove();
+        acting = false;
+
+        if (isMatch) {
+          activeMatch = profile;
+          showMatch(profile);
+        } else if (!visibleCards().length) {
+          showEmpty();
+        }
+      }, 390);
+    }, 90);
+  }
+
+  // ── Match overlay ────────────────────────────────────────
+  function showMatch(profile) {
+    document.getElementById('match-p').textContent      = `You and ${profile.name} both want to swap!`;
+    document.getElementById('match-av-them').src        = profile.avatar;
+    document.getElementById('chat-av').src              = profile.avatar;
+    document.getElementById('chat-name').textContent    = profile.name;
+    document.getElementById('chat-sub').textContent     = `Matched today · ${profile.city}`;
+    addToInbox(profile);
+    showScreen('match');
+  }
+
+  function addToInbox(profile) {
+    // Remove placeholder
+    const placeholder = document.getElementById('no-matches-yet');
+    if (placeholder) placeholder.remove();
+
+    // Bubble
+    const bub = document.createElement('div');
+    bub.className = 'match-bub';
+    bub.innerHTML = `<img src="${profile.avatar}" alt="${profile.name}" /><span>${profile.name}</span>`;
+    bub.onclick = () => openChat(profile);
+    document.getElementById('match-bubbles').appendChild(bub);
+
+    // Conversation row
+    const convo = document.createElement('div');
+    convo.className = 'convo';
+    convo.innerHTML = `
+      <img src="${profile.avatar}" alt="${profile.name}" />
+      <div class="convo-text">
+        <div class="convo-name">${profile.name}</div>
+        <div class="convo-preview">Perfect ☀️ See you then!</div>
+      </div>
+      <div class="convo-time">just now</div>
+    `;
+    convo.onclick = () => openChat(profile);
+    document.getElementById('convo-list').appendChild(convo);
+
+    // Hide badge
+    document.getElementById('inbox-badge').style.display = 'none';
+  }
+
+  function openChat(profile) {
+    if (profile) {
+      document.getElementById('chat-av').src           = profile.avatar;
+      document.getElementById('chat-name').textContent = profile.name;
+      document.getElementById('chat-sub').textContent  = `Matched today · ${profile.city}`;
+    }
+    showScreen('chat');
+  }
+
+  function showEmpty() {
+    document.getElementById('empty-state').classList.add('show');
+    document.getElementById('action-bar').style.display = 'none';
+  }
+
+  // ── Screen router ────────────────────────────────────────
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+
+    const s = document.getElementById('screen-' + name);
+    if (s) s.classList.add('active');
+
+    const t = document.getElementById('tab-' + name);
+    if (t) t.classList.add('active');
+  }
+
+  // ── Wiring ───────────────────────────────────────────────
+  document.getElementById('btn-skip').onclick  = () => doAction(false);
+  document.getElementById('btn-heart').onclick = () => doAction(true);
+
+  document.getElementById('btn-open-chat').onclick   = () => activeMatch && openChat(activeMatch);
+  document.getElementById('btn-browse-more').onclick = () => {
+    showScreen('browse');
+    if (!visibleCards().length) showEmpty();
+  };
+  document.getElementById('btn-chat-back').onclick = () => showScreen('inbox');
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  doAction(false);
+    if (e.key === 'ArrowRight') doAction(true);
+  });
+
+  // Drag / swipe
+  let dragStartX = null;
+
+  document.getElementById('card-area').addEventListener('mousedown', e => {
+    if (!e.target.closest('.card')) return;
+    dragStartX = e.clientX;
+  });
+  document.addEventListener('mouseup', e => {
+    if (dragStartX === null) return;
+    const dx = e.clientX - dragStartX;
+    dragStartX = null;
+    if (Math.abs(dx) > 55) doAction(dx > 0);
+  });
+
+  document.getElementById('card-area').addEventListener('touchstart', e => {
+    dragStartX = e.touches[0].clientX;
+  }, { passive: true });
+  document.getElementById('card-area').addEventListener('touchend', e => {
+    if (dragStartX === null) return;
+    const dx = e.changedTouches[0].clientX - dragStartX;
+    dragStartX = null;
+    if (Math.abs(dx) > 50) doAction(dx > 0);
+  }, { passive: true });
+
+  // Init
+  initCards();
+</script>
+</body>
+</html>
